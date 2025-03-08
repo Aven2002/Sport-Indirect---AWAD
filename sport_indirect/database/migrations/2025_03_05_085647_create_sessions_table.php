@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('sessions', function (Blueprint $table) {
             $table->string('id')->primary(); // Session ID
-            $table->foreignId('user_id')->nullable()->constrained()->onDelete('cascade'); // Authenticated User (optional)
+            $table->foreignId('user_id')->constrained()->onDelete('cascade'); // Authenticated User (optional)
             $table->string('ip_address', 45)->nullable(); // IP Address
             $table->text('user_agent')->nullable(); // User Browser & Device Info
             $table->longText('payload'); // Session Data
