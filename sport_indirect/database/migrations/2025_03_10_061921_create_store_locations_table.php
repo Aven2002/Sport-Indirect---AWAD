@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('store_location', function (Blueprint $table) {
+        Schema::create('store_locations', function (Blueprint $table) {
             $table->id();
             $table->string('storeName',50);
             $table->string('imgPath');
