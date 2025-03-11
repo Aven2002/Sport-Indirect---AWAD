@@ -9,7 +9,8 @@ class StoreLocation extends Model
 {
     use HasFactory;
 
-    protected $table = 'store_locations'; // Explicitly defining the table name
+    protected $table = 'store_locations'; 
 
-    protected $fillable = ['shop_name', 'address', 'phone_no', 'img'];
+    protected $fillable = ['storeName', 'imgPath', 'address', 'phoneNo'];
 }
+
