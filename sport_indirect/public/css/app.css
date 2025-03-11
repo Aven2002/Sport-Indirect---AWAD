@@ -1,0 +1,129 @@
+body {
+    font-family: Arial, sans-serif;
+    background: url('/images/background.jpeg') no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 100vh;
+    padding: 3% 10%; 
+}
+
+/* Container */
+.container {
+    background: #ffffffd1;
+    padding: 60px; 
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    text-align: center;
+    margin: 15px 0;
+}
+
+/* Logo */
+.logo {
+    width: 160px;
+    margin-bottom: -30px;
+}
+
+/* Input Group */
+.input-group {
+    margin-bottom: 15px;
+    text-align: left;
+    position: relative;
+}
+
+/* Labels */
+label {
+    display: block;
+    font-weight: bold;
+    color: black;
+}
+
+/* Inputs and Selects */
+input, select {
+    width: 100%;
+    padding: 10px; 
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+input[type="date"] {
+    cursor: pointer;
+}
+
+/* Error Messages */
+.error {
+    color: red;
+    font-size: 12px;
+    display: none;
+    margin-top: 5px;
+    padding: 3px;
+}
+
+/* Input Wrapper for Icons */
+.input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+/* Eye Icon for Password Toggle */
+.eye-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: gray;
+    font-size: 18px;
+}
+
+/* Button Styling */
+.btn {
+    width: 100%;
+    background-color: #2841a7;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 25px;
+}
+
+/* Checkbox Group (Registration Page) */
+.checkbox-group label {
+    display: flex;
+    align-items: center;
+    color: black;
+    font-size: 14px;
+    cursor: pointer;
+    margin-top: 31px;
+}
+
+.checkbox-group input[type="checkbox"] {
+    margin-right: 8px;
+    width: 45px;
+    margin-top: -25px;
+    height: 16px;
+}
+
+/* Links (Used in Login and Forgot Password Pages) */
+.links {
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.links a {
+    color: #2841a7;
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+.links a:hover {
+    text-decoration: underline;
+}

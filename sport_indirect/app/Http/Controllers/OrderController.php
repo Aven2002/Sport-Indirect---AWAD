@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Request\OrderUpdateRequest;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
-use Illuminate\View\View;
+use App\Models\Order;
 
 class OrderController extends Controller
 {
+    public function index()
+    {
+        $orders = Order::all();
+        return response()->json($orders);
+    }
+}
     /**
      * Display all the history orders
      */
@@ -30,4 +32,3 @@ class OrderController extends Controller
     /**
      * Delete the specific existing order
      */
-}

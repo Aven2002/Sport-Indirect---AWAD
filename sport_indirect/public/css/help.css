@@ -1,0 +1,60 @@
+/* Help Page Styles */
+body {
+    background: white !important; 
+    color: black; 
+    font-family: Arial, sans-serif;
+}
+
+.help-page {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 60px;
+    background: #fff;
+    color: #000;
+    font-family: Arial, sans-serif;
+    border-radius: 8px;
+    box-shadow: 0px 2px 8px rgb(0 0 0 / 64%);;
+}
+
+.help-page h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.help-page p {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.help-search {
+    margin-bottom: 20px;
+}
+
+.help-search input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.help-results {
+    margin-top: 20px;
+}
+
+.help-result-item {
+    border-bottom: 1px solid #ccc;
+    padding: 15px 0;
+}
+
+.help-result-item h3 {
+    margin: 0;
+    font-size: 18px;
+    color: #333;
+}
+
+.help-result-item p {
+    margin: 5px 0 0;
+    font-size: 16px;
+    color: #555;
+}

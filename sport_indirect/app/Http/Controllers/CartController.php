@@ -3,14 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Carts; 
+use App\Models\Cart; 
 
 class CartController extends Controller
 {
     public function index()
     {
-        $stores = Carts::all(); // Retrieve all records from carts table
-        return response()->json($stores);
+        $cart = Cart::all(); // Retrieve all records from carts table
+        return response()->json($cart);
     }
 }
 

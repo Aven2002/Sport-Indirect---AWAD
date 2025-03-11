@@ -1,0 +1,133 @@
+
+body {
+    background: white; 
+    color: black; 
+    font-family: Arial, sans-serif;
+}
+
+/* Slideshow Styles */
+.slideshow-container {
+    position: relative;
+    width: 100%;
+    height: 500px;
+    overflow: hidden;
+    background: white;
+}
+
+.slides {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.slide {
+    display: none;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.slide.active {
+    display: block;
+}
+
+/* Controls */
+.controls {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 15px;
+}
+
+.prev, .next, .stop {
+    background: black;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 18px;
+    border-radius: 50%;
+    transition: 0.3s;
+}
+
+.prev:hover, .next:hover, .stop:hover {
+    background: gray;
+}
+
+/* Featured Products */
+.featured-products {
+    text-align: center;
+    padding: 30px 20px;
+    background: white;
+}
+
+.featured-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.featured-item {
+    text-align: center;
+    padding: 10px;
+    background: black; 
+    border-radius: 10px;
+    color: white; 
+}
+
+.featured-item img {
+    width: 150px;
+    border-radius: 10px;
+}
+
+.featured-item h3, .featured-item p {
+    color: white;
+}
+
+/* Animated Introduction */
+.animated-intro {
+    text-align: center;
+    padding: 40px 20px;
+    background: white;
+}
+
+.animated-product img {
+    width: 75%;
+    display: block;
+    margin: auto;
+    object-fit: cover;
+}
+
+/* Categories */
+.categories {
+    text-align: center;
+    padding: 40px 20px;
+    background: white;
+    margin-top: -90px;
+}
+
+.category-list {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.category-item {
+    padding: 10px 20px;
+    background: black; 
+    border: 1px solid black;
+    border-radius: 5px;
+    cursor: pointer;
+    color: white; 
+    transition: 0.3s;
+    text-decoration: none; 
+}
+
+.category-item:hover {
+    background: gray;
+    color: white;
+}
+

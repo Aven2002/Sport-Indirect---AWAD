@@ -1,0 +1,138 @@
+body {
+    background-color: #fff !important;
+    color: #000;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Page Layout */
+.order-status-page {
+    max-width: 1100px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #fff;
+    color: #000;
+}
+.page-title {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #000;
+}
+
+/* Navigation for Order Status */
+.status-nav {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 30px;
+    display: flex;
+    gap: 15px;
+}
+.status-nav li a {
+    text-decoration: none;
+    color: #000;
+    padding: 8px 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    transition: background 0.3s, color 0.3s;
+}
+.status-nav li.active a,
+.status-nav li a:hover {
+    background: #333;
+    color: #fff;
+}
+
+/* Order Card Styling */
+.order-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    background: #fff;
+    box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
+}
+.order-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-between;
+    align-items: center;
+}
+.product-details {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+.product-image {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+.product-info h4 {
+    margin: 0 0 5px;
+    font-size: 18px;
+    color: #000;
+}
+.product-info p {
+    margin: 3px 0;
+    color: #000;
+}
+.order-location {
+    min-width: 200px;
+}
+.order-location h5 {
+    margin: 0 0 5px;
+    font-size: 16px;
+    color: #000;
+}
+.order-location p {
+    margin: 0;
+    color: #000;
+}
+
+/* Order Action Buttons */
+.order-actions {
+    margin-top: 15px;
+    display: flex;
+    gap: 15px;
+}
+.order-actions .btn {
+    padding: 10px 20px;
+    font-size: 14px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+.return-refund-btn {
+    background: #ff4d4d;
+    color: #fff;
+}
+.return-refund-btn:hover {
+    background: #e60000;
+}
+.order-received-btn {
+    background: #4CAF50;
+    color: #fff;
+}
+.order-received-btn:hover {
+    background: #45a049;
+}
+
+/* Responsive Design for Status Navigation */
+@media (max-width: 768px) {
+    .status-nav {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .status-nav li {
+        flex: 1 1 45%; /* 2 columns */
+        margin-bottom: 10px;
+        text-align: center;
+    }
+    .status-nav li a {
+        padding: 8px 5px;
+    }
+}

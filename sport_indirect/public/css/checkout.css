@@ -1,0 +1,159 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background: white !important;
+    color: black;
+    margin: 0;
+    padding: 0;
+}
+
+/* Container */
+.container {
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+}
+
+.checkout-title {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 24px;
+    margin-top: -31px;
+    color: #333;
+}
+
+/* Receipt (Order Summary) */
+#order-summary.receipt {
+    background: #f8f8f8;
+    color: black;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.receipt-header {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.receipt-items {
+    border-bottom: 1px dashed #ccc;
+    margin-bottom: 20px;
+}
+
+.receipt-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.receipt-item-info,
+.receipt-item-details {
+    font-size: 16px;
+}
+
+.receipt-totals .receipt-row {
+    display: flex;
+    justify-content: space-between;
+    margin: 5px 0;
+    font-size: 16px;
+}
+
+.receipt-totals .receipt-row.total {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* Form Fields (inputs and selects) */
+input, select {
+    width: 100%;
+    padding: 12px;
+    margin-top: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Checkout Button */
+.checkout-btn {
+    background: black;
+    color: white;
+    padding: 12px;
+    width: 100%;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    margin-top: 15px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.checkout-btn:hover {
+    background: #333;
+}
+
+/* Utility Classes */
+.fw-bold {
+    font-weight: bold;
+}
+
+.mt-5 {
+    margin-top: 3rem;
+}
+
+.mb-2 {
+    margin-bottom: 0.5rem;
+}
+
+.mb-4 {
+    margin-bottom: 1.5rem;
+}
+
+/* Order Item Styles */
+.order-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.order-item img {
+    width: 80px;
+    height: 80px;
+    border-radius: 8px;
+}
+
+/* Delivery & Pickup Forms */
+.delivery-method, .pickup-method {
+    margin-bottom: 20px;
+}
+
+/* Delivery Method Buttons */
+.delivery-method-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.delivery-method-buttons button {
+    width: 48%;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+    background: #f2f2f2;
+    color: #333;
+}
+
+.delivery-method-buttons button.active,
+.delivery-method-buttons button:hover {
+    background: #333;
+    color: #fff;
+}

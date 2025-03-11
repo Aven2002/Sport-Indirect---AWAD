@@ -1,0 +1,49 @@
+
+body {
+    background: white !important;
+    color: black;
+    font-family: Arial, sans-serif;
+}
+
+.container { 
+    display: flex; 
+    max-width: 1200px; 
+    margin: 20px auto; 
+    background: white; 
+}
+
+.available-header{
+    color:black;
+}
+
+.store-list {
+    width: 30%; 
+    padding: 20px; 
+    overflow-y: auto; 
+    border-right: 2px solid #ccc; 
+    background: white;
+}
+
+.store-list div { 
+    cursor: pointer; 
+    padding: 10px; 
+    border-bottom: 1px solid #ddd; 
+    color: black;
+}
+
+.store-list div:hover { 
+    background: #f0f0f0; 
+}
+
+#map { 
+    width: 70%; 
+    height: 500px; 
+    background: white;
+}
+
+.store-info { 
+    padding: 10px; 
+    background: white; 
+    font-size: 14px;
+    color: black;
+}
