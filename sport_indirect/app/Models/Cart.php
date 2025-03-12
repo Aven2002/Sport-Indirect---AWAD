@@ -9,5 +9,11 @@ class Cart extends Model
 {
     use HasFactory;
 
-    protected $table = 'carts'; // Explicitly defining the table name
+    protected $table = 'carts'; 
+
+    //To automatically retrieve product details when fetching cart items
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
+    }
 }

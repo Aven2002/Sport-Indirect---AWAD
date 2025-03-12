@@ -11,7 +11,7 @@ use App\Http\Controllers\UserController;
 
 Route::get('/carts', [CartController::class, 'index']);
 Route::get('/orders',[OrderController::class,'index']);
-Route::get('/product',[ProductController::class,'index']);
+
 Route::get('/profile',[ProfileController::class,'index']);
 Route::get('/user',[UserController::class,'index']);
 
@@ -21,3 +21,11 @@ Route::post('/stores', [StoreController::class, 'store']);
 Route::delete('/stores/{id}', [StoreController::class, 'destroy']);
 Route::put('/stores/{id}', [StoreController::class, 'update']);
 
+//Cart
+Route::get('/cart', [CartController::class, 'getUserCart']);
+
+//Product
+Route::get('/product',[ProductController::class,'index']);
+Route::post('/product',[ProductController::class,'store']);
+Route::put('/product/{id}',[ProductController::class,'update']);
+Route::delete('/product/{id}',[ProductController::class,'destroy']);
