@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Product;
-use App\Models\Product_details;
+use App\Models\ProductDetail;
 
 class ProductController extends Controller
 {
@@ -30,7 +30,7 @@ class ProductController extends Controller
             'description' => 'required|string',
             'stock' => 'required|integer|min:0',
             'imgPath' => 'required|string',
-            'equipPrice' => 'required|numeric|min:0',
+            'equipPrice' => 'required|numeric|min:0'
         ]);
 
         try {
@@ -44,7 +44,7 @@ class ProductController extends Controller
             ]);
 
             // Step 2: Insert into product_details table
-            Product_details::create([
+            ProductDetail::create([
                 'product_id' => $product->id,
                 'description' => $validatedData['description'],
                 'stock' => $validatedData['stock'],
@@ -83,7 +83,7 @@ class ProductController extends Controller
             }
 
             // Find related product details
-            $productDetails = Product_details::where('product_id', $id)->first();
+            $productDetails = ProductDetail::where('product_id', $id)->first();
             if (!$productDetails) {
                 return response()->json(['message' => 'Product details not found'], 404);
             }
@@ -108,7 +108,7 @@ class ProductController extends Controller
                 'productBrand' => $validatedData['productBrand'],
             ]);
 
-            // Update `product_details` table
+            // Update `Product_details` table
             $productDetails->update([
                 'description' => $validatedData['description'],
                 'stock' => $validatedData['stock'],
