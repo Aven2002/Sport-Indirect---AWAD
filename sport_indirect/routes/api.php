@@ -25,7 +25,10 @@ Route::put('/stores/{id}', [StoreController::class, 'update']);
 
 //Cart
 Route::get('/cart', [CartController::class, 'index']);
-Route::get('/cart', [CartController::class, 'getUserCart']);
+Route::get('/cart/{user_id}', [CartController::class, 'getUserCart']);
+Route::post('/cart',[CartController::class, 'addToCart']);
+Route::put('/cart',[CartController::class,'update']);
+Route::delete('/cart',[CartController::class,'destroy']);
 
 //Product
 Route::get('/product',[ProductController::class,'index']);
