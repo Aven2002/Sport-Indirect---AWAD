@@ -16,12 +16,7 @@ class ProductSeeder extends Seeder
                 'productName' => 'YONEX ASTROX 88 D PRO',
                 'productCategory' => 'Racquet',
                 'productBrand' => 'YONEX',
-                'description' => "A stiff racquet made from HM Graphite, CFR, and Tungsten,
-                                with 2G-Namd FLEX FORCE and Ultra PE Fiber for enhanced flexibility and power. 
-                                Features a NEW Built-in T-Joint for improved stability. 
-                                Measures 680mm (10mm longer for extra reach).
-                                Weighs 4U (Avg. 83g), with a recommended tension of 20-28 lbs. 
-                                Available in Black and Silver. Made in Japan.",
+                'description' => "A stiff racquet made from HM Graphite, CFR, and Tungsten,with 2G-Namd FLEX FORCE and Ultra PE Fiber for enhanced flexibility and power. Features a NEW Built-in T-Joint for improved stability. Measures 680mm (10mm longer for extra reach). Weighs 4U (Avg. 83g), with a recommended tension of 20-28 lbs. Available in Black and Silver. Made in Japan.",
                 'stock' => 50,
                 'imgPath' => 'Racquet/YONEX ASTROX 88 D PRO.png',
                 'equipPrice' => 839.90,
@@ -30,12 +25,7 @@ class ProductSeeder extends Seeder
                 'productName' => 'YONEX ASTROX 100ZZ',
                 'productCategory' => 'Racquet',
                 'productBrand' => 'YONEX',
-                'description' => "An extra stiff racquet constructed with HM Graphite, Namd, Tungsten, Black Micro Core, and Nanometric for maximum power and control. 
-                                The shaft is made of HM Graphite and Namd for enhanced repulsion. 
-                                Features a NEW Built-in T-Joint for improved stability. 
-                                Measures 680mm (10mm longer for extended reach). 
-                                Weighs 4U (Avg. 83g), with a recommended tension of 20-28 lbs. 
-                                Available in Kurenai and Dark Navy. Made in Japan.",
+                'description' => "An extra stiff racquet constructed with HM Graphite, Namd, Tungsten, Black Micro Core, and Nanometric for maximum power and control. The shaft is made of HM Graphite and Namd for enhanced repulsion. Features a NEW Built-in T-Joint for improved stability. Measures 680mm (10mm longer for extended reach). Weighs 4U (Avg. 83g), with a recommended tension of 20-28 lbs. Available in Kurenai and Dark Navy. Made in Japan.",
                 'stock' => 40,
                 'imgPath' => 'Racquet/YONEX ASTROX 100ZZ.png',
                 'equipPrice' => 899.90,
@@ -44,11 +34,7 @@ class ProductSeeder extends Seeder
                 'productName' => 'LI- NING AXFORCE 100 QILIN BLACK GOLD',
                 'productCategory' => 'Racquet',
                 'productBrand' => 'LI- NING',
-                'description' => "A stiff racquet made from Extra High Elastic Carbon Fiber with a STD High-Modulus Carbon Fiber shaft for enhanced durability and power. 
-                                Features a NEW Built-in T-Joint for improved stability. 
-                                Measures 680mm (10mm longer for extended reach). 
-                                Weighs 4U G5, with a recommended tension of 23-31 lbs. 
-                                Available in Black and Gold. Made in China.",
+                'description' => "A stiff racquet made from Extra High Elastic Carbon Fiber with a STD High-Modulus Carbon Fiber shaft for enhanced durability and power. Features a NEW Built-in T-Joint for improved stability. Measures 680mm (10mm longer for extended reach). Weighs 4U G5, with a recommended tension of 23-31 lbs. Available in Black and Gold. Made in China.",
                 'stock' => 60,
                 'imgPath' => 'Racquet/LI- NING AXFORCE 100 QILIN BLACK GOLD.png',
                 'equipPrice' => 980.00,
@@ -57,11 +43,7 @@ class ProductSeeder extends Seeder
                 'productName' => 'LI- NING BLADE X 700 BLUE',
                 'productCategory' => 'Racquet',
                 'productBrand' => 'LI- NING',
-                'description' => "A stiff racquet made from carbon fiber, featuring a hard flexible shaft for balanced power and control.
-                                Equipped with a Built-in T-Joint for enhanced stability.
-                                Measures 675mm in length. 
-                                Weighs 3U G5, with a recommended tension of 23-31 lbs.
-                                Available in Blue. Made in China.",
+                'description' => "A stiff racquet made from carbon fiber, featuring a hard flexible shaft for balanced power and control. Equipped with a Built-in T-Joint for enhanced stability. Measures 675mm in length. Weighs 3U G5, with a recommended tension of 23-31 lbs. Available in Blue. Made in China.",
                 'stock' => 30,
                 'imgPath' => 'Racquet/LI- NING BLADE X 700 BLUE.png',
                 'equipPrice' => 729.00,
@@ -70,12 +52,7 @@ class ProductSeeder extends Seeder
                 'productName' => 'VICTOR IRON MAN METALLIC MA-IRONMAN',
                 'productCategory' => 'Racquet',
                 'productBrand' => 'VICTOR',
-                'description' => "A stiff racquet constructed with High Resilience Modulus Graphite, Nano Resin, Metallic Carbon Fiber, 
-                                and Hard Cored Technology for enhanced durability and responsiveness. 
-                                The shaft is made of High Resilience Modulus Graphite and Nano Resin for improved repulsion.
-                                Features a Built-in T-Joint for better stability. 
-                                Measures 675mm in length. Weighs 4U G5, with a recommended tension of 22-28 lbs. 
-                                Available in Red. Made in Taiwan.",
+                'description' => "A stiff racquet constructed with High Resilience Modulus Graphite, Nano Resin, Metallic Carbon Fiber, and Hard Cored Technology for enhanced durability and responsiveness. The shaft is made of High Resilience Modulus Graphite and Nano Resin for improved repulsion. Features a Built-in T-Joint for better stability. Measures 675mm in length. Weighs 4U G5, with a recommended tension of 22-28 lbs. Available in Red. Made in Taiwan.",
                 'stock' => 45,
                 'imgPath' => 'Racquet/VICTOR IRON MAN METALLIC GB D Badminton Racket MA.png',
                 'equipPrice' => 1050.00,
@@ -84,11 +61,7 @@ class ProductSeeder extends Seeder
                 'productName' => 'VICTOR MJOLNIR METALLIC MA-MJOLNIR',
                 'productCategory' => 'Racquet',
                 'productBrand' => 'VICTOR',
-                'description' => "A stiff racquet made from High Resilience Modulus Graphite, Metallic Carbon Fiber, and Hard Cored Technology
-                                for enhanced power and durability. The shaft features High Resilience Modulus Graphite with a 6.8mm diameter for improved flexibility and control.
-                                Equipped with a Built-in T-Joint for better stability.
-                                Measures 675mm in length. Weighs 4U G6, with a recommended tension of 22-30 lbs. 
-                                Available in Blue. Made in Taiwan.",
+                'description' => "A stiff racquet made from High Resilience Modulus Graphite, Metallic Carbon Fiber, and Hard Cored Technology for enhanced power and durability. The shaft features High Resilience Modulus Graphite with a 6.8mm diameter for improved flexibility and control. Equipped with a Built-in T-Joint for better stability. Measures 675mm in length. Weighs 4U G6, with a recommended tension of 22-30 lbs. Available in Blue. Made in Taiwan.",
                 'stock' => 65,
                 'imgPath' => 'Racquet/VICTOR MJOLNIR METALLIC Limited Racket Badminton Racket MA-MJOLNIR.png',
                 'equipPrice' => 950.00,

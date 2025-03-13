@@ -18,4 +18,9 @@ class Product extends Model
         'created_at',
         'updated_at'
     ];
+
+    public function productDetail()
+    {
+        return $this->hasOne(ProductDetail::class, 'product_id');
+    }
 }
