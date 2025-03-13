@@ -9,13 +9,14 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AddressController;
 
+//Profile
+Route::get('/profile/{id}',[ProfileController::class,'getProfile']);
+Route::put('/profile/{id}',[ProfileController::class,'update']);
 
-
-
-
-
-Route::get('/profile',[ProfileController::class,'index']);
+//User
 Route::get('/user',[UserController::class,'index']);
+Route::post('/user',[UserController::class,'store']);
+Route::delete('/user/{id}',[UserController::class,'destroy']);
 
 //Store 
 Route::get('/stores', [StoreController::class, 'index']);
