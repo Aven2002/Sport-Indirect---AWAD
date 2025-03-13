@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('storeName',50);
             $table->string('imgPath');
             $table->string('address');
+            $table->string('operationHour');
             $table->string('phoneNo')->nullable();
             $table->timestamps();
         });
