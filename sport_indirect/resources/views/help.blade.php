@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Help - Sport Indirect</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="{{ asset('css/help.css') }}">
 </head>
 
@@ -12,18 +13,20 @@
 @section('content')
 
 <body>
-
-    <div class="help-page">
-        <h1>Help Center</h1>
-        <p>Type your question below and get instant answers:</p>
+    <div class="container mt-5 help-page">
+        <h1 class="text-center text-dark">Help Center</h1>
+        <p class="text-center text-dark">Type your question below and get instant answers:</p>
         
-        <div class="help-search">
-            <input type="text" id="helpQuery" placeholder="Enter your question...">
+        <div class="mb-3">
+            <input type="text" id="helpQuery" class="form-control" placeholder="Enter your question...">
         </div>
-        
+
         <!-- Results will be displayed here -->
-        <div id="helpResults" class="help-results"></div>
+        <div id="helpResults" class="list-group"></div>
     </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
@@ -32,16 +35,13 @@
             
             let debounceTimeout = null;
             
-            // Listen for keyup events in the search field
             helpQueryInput.addEventListener("keyup", function() {
                 const query = this.value.trim();
                 
-                // Clear previous debounce timer
                 if (debounceTimeout) {
                     clearTimeout(debounceTimeout);
                 }
                 
-                // Wait 500ms after typing stops to perform the search
                 debounceTimeout = setTimeout(() => {
                     if (query.length > 0) {
                         fetchHelpResults(query);
@@ -52,13 +52,6 @@
             });
             
             function fetchHelpResults(query) {
-                // In a real implementation, replace this simulation with a fetch call, for example:
-                // fetch('/api/help?q=' + encodeURIComponent(query))
-                //     .then(response => response.json())
-                //     .then(data => displayHelpResults(data))
-                //     .catch(error => console.error("Error:", error));
-                
-                // Dummy data for demonstration:
                 const dummyData = [
                     { question: "How do I return a product?", answer: "You can return a product within 30 days of purchase if it is in original condition." },
                     { question: "What is your shipping policy?", answer: "We offer free shipping on orders above RM200 and fast delivery across the region." },
@@ -66,7 +59,6 @@
                     { question: "Can I cancel my order?", answer: "Yes, you can cancel your order within 1 hour of placing it by contacting customer support." }
                 ];
                 
-                // Filter dummy data based on the query
                 const filteredData = dummyData.filter(item => 
                     item.question.toLowerCase().includes(query.toLowerCase()) ||
                     item.answer.toLowerCase().includes(query.toLowerCase())
@@ -76,19 +68,17 @@
             }
             
             function displayHelpResults(results) {
-                // Clear previous results
                 helpResultsContainer.innerHTML = "";
-                
+
                 if (results.length === 0) {
-                    helpResultsContainer.innerHTML = "<p>No results found.</p>";
+                    helpResultsContainer.innerHTML = '<p class="text-danger">No results found.</p>';
                     return;
                 }
-                
-                // Append each result as an item
+
                 results.forEach(item => {
                     const div = document.createElement("div");
-                    div.className = "help-result-item";
-                    div.innerHTML = `<h3>${item.question}</h3><p>${item.answer}</p>`;
+                    div.className = "list-group-item";
+                    div.innerHTML = `<h5 class="text-primary">${item.question}</h5><p class="text-secondary">${item.answer}</p>`;
                     helpResultsContainer.appendChild(div);
                 });
             }

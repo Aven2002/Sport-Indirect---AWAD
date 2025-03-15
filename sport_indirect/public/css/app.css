@@ -1,36 +1,41 @@
+/* General Page Styles */
 body {
     font-family: Arial, sans-serif;
     background: url('/images/background.jpeg') no-repeat center center fixed;
     background-size: cover;
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: center;
     height: 100vh;
-    padding: 3% 10%; 
+    padding: 3% 10%;
+    overflow-y: auto;
+    margin: 0;
 }
 
-/* Container */
+/* Centered Form Container */
 .container {
     background: #ffffffd1;
-    padding: 60px; 
+    padding: 40px;
     border-radius: 8px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     width: 400px;
     text-align: center;
     margin: 15px 0;
+    max-height: 90vh; /* Prevent cutoff */
+    overflow-y: auto; /* Enable scrolling if needed */
 }
 
-/* Logo */
+/* Logo Styling */
 .logo {
     width: 160px;
-    margin-bottom: -30px;
+    margin-bottom: -20px;
 }
 
 /* Input Group */
 .input-group {
     margin-bottom: 15px;
-    text-align: left;
     position: relative;
+    text-align: left; /* Ensures labels and fields are left-aligned */
 }
 
 /* Labels */
@@ -38,40 +43,30 @@ label {
     display: block;
     font-weight: bold;
     color: black;
+    text-align: left; /* Consistent alignment */
+    margin-bottom: 5px;
 }
 
-/* Inputs and Selects */
+/* Input Fields */
 input, select {
     width: 100%;
-    padding: 10px; 
-    margin-top: 5px;
+    padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 14px;
     box-sizing: border-box;
 }
 
-input[type="date"] {
-    cursor: pointer;
-}
-
-/* Error Messages */
-.error {
-    color: red;
-    font-size: 12px;
-    display: none;
-    margin-top: 5px;
-    padding: 3px;
-}
-
-/* Input Wrapper for Icons */
-.input-wrapper {
+/* Password Input Field Styling */
+.input-group {
     position: relative;
-    display: flex;
-    align-items: center;
 }
 
-/* Eye Icon for Password Toggle */
+.input-group input {
+    padding-right: 40px; /* Space for eye icon */
+}
+
+/* Eye Icon (Password Toggle) */
 .eye-icon {
     position: absolute;
     right: 10px;
@@ -82,7 +77,15 @@ input[type="date"] {
     font-size: 18px;
 }
 
-/* Button Styling */
+/* Error Message Styling */
+.error {
+    color: red;
+    font-size: 12px;
+    display: none;
+    margin-top: 5px;
+}
+
+/* Buttons */
 .btn {
     width: 100%;
     background-color: #2841a7;
@@ -92,27 +95,30 @@ input[type="date"] {
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
-    margin-top: 25px;
+    margin-top: 15px;
 }
 
-/* Checkbox Group (Registration Page) */
+.btn:hover {
+    background-color: #1e338f;
+}
+
+/* Checkbox Group (Used in Registration) */
 .checkbox-group label {
     display: flex;
     align-items: center;
     color: black;
     font-size: 14px;
     cursor: pointer;
-    margin-top: 31px;
+    margin-top: 10px;
 }
 
 .checkbox-group input[type="checkbox"] {
     margin-right: 8px;
-    width: 45px;
-    margin-top: -25px;
+    width: 16px;
     height: 16px;
 }
 
-/* Links (Used in Login and Forgot Password Pages) */
+/* Links */
 .links {
     margin-top: 15px;
     font-size: 14px;

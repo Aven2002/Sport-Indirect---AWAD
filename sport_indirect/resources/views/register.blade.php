@@ -1,11 +1,13 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sport Indirect Register</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+
     <script>
         function validateInput(input, regex, errorId) {
             let errorElement = document.getElementById(errorId);
@@ -25,9 +27,16 @@
                 errorElement.style.display = "none";
             }
         }
-        function togglePasswordVisibility(id) {
+        function togglePasswordVisibility(id, iconId) {
             let input = document.getElementById(id);
-            input.type = input.type === "password" ? "text" : "password";
+            let icon = document.getElementById(iconId);
+            if (input.type === "password") {
+                input.type = "text";
+                icon.classList.replace("bi-eye", "bi-eye-slash");
+            } else {
+                input.type = "password";
+                icon.classList.replace("bi-eye-slash", "bi-eye");
+            }
         }
         function validateForm(event) {
             let checkBox = document.getElementById("agree");
@@ -42,10 +51,8 @@
         function validateDOB() {
             let dobInput = document.querySelector('input[name="dob"]');
             let dobError = document.getElementById("dobError");
-            
             let selectedDate = new Date(dobInput.value);
             let today = new Date();
-            
             if (selectedDate > today) {
                 dobError.style.display = "block";
             } else {
@@ -54,73 +61,88 @@
         }
     </script>
 </head>
-<body>
-    <div class="container">
-        <img src="images/logo.png" alt="Logo" class="logo">
-        <h2 style="color:black;">Sign Up for Sport Indirect</h2>
-        <h3 style="color:#9a9a9a; font-size: 90%; margin-top: -5px;">Be part of Sport Indirect</h3>
+
+<body class="d-flex justify-content-center align-items-center vh-100 p-3" 
+    style="background: url('/images/background.jpeg') no-repeat center center fixed; background-size: cover;">
+
+    <div class="container bg-white p-4 rounded shadow-lg text-center" style="max-width: 400px; opacity: 0.95;">
+        <img src="images/logo.png" alt="Logo" class="img-fluid mb-2" style="width: 160px;">
+        <h2 class="text-dark fw-bold">Sign Up</h2>
+        <h3 class="text-secondary fs-6 mb-3">Be part of Sport Indirect</h3>
 
         @if(session('success'))
-            <p class="success">{{ session('success') }}</p>
+            <p class="text-success">{{ session('success') }}</p>
         @endif
 
         <form action="/register" method="POST" onsubmit="validateForm(event)">
             @csrf
-            <div class="input-group">
-                <label>Email</label>
-                <input type="email" name="email" required oninput="validateInput(this, /^[^\s@]+@[^\s@]+\.[^\s@]+$/, 'emailError')">
-                <p class="error" id="emailError">Enter a valid email address.</p>
-            </div>
-            <div class="input-group">
-                <label>Username</label>
-                <input type="text" name="first_name" required oninput="validateInput(this, /^[A-Za-z]{2,}$/, 'firstNameError')">
-                <p class="error" id="firstNameError">Username must be at least 2 letters.</p>
-            </div>
-            <div class="input-group">
-                <label>Date of Birth</label>
-                <input type="date" name="dob" required oninput="validateDOB()">
-                <p class="error" id="dobError">Date of birth cannot be in the future.</p>
-            </div>
-            <div class="input-group">
-                <label>Password</label>
-                <div class="input-wrapper">
-                    <input type="password" id="password" name="password" required 
-                        oninput="validateInput(this, /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{6,}$/, 'passwordError')">
-                    <span class="eye-icon" onclick="togglePasswordVisibility('password')">👁</span>
-                </div>
-                <p class="error" id="passwordError">Password must contain at least 1 uppercase letter, 1 lowercase letter, 1 number, 1 symbol, and be at least 6 characters long.</p>
+            <div class="mb-3 text-start">
+                <label class="form-label fw-bold text-dark">Email</label>
+                <input type="email" name="email" class="form-control border-0 shadow-none bg-light" required 
+                    oninput="validateInput(this, /^[^\s@]+@[^\s@]+\.[^\s@]+$/, 'emailError')">
+                <p class="text-danger small mt-1" id="emailError" style="display: none;">Enter a valid email address.</p>
             </div>
 
-            <div class="input-group">
-                <label>Confirm Password</label>
-                <div class="input-wrapper">
-                    <input type="password" id="confirm_password" name="confirm_password" required oninput="checkPasswordsMatch()">
-                    <span class="eye-icon" onclick="togglePasswordVisibility('confirm_password')">👁</span>
-                </div>
-                <p class="error" id="confirmPasswordError">Passwords do not match.</p>
+            <div class="mb-3 text-start">
+                <label class="form-label fw-bold text-dark">Username</label>
+                <input type="text" name="first_name" class="form-control border-0 shadow-none bg-light" required 
+                    oninput="validateInput(this, /^[A-Za-z]{2,}$/, 'firstNameError')">
+                <p class="text-danger small mt-1" id="firstNameError" style="display: none;">Username must be at least 2 letters.</p>
             </div>
-            <div class="input-group">
-                <label>Security Question</label>
-                <select name="security_question">
+
+            <div class="mb-3 text-start">
+                <label class="form-label fw-bold text-dark">Date of Birth</label>
+                <input type="date" name="dob" class="form-control border-0 shadow-none bg-light" required oninput="validateDOB()">
+                <p class="text-danger small mt-1" id="dobError" style="display: none;">Date of birth cannot be in the future.</p>
+            </div>
+
+            <div class="mb-3 text-start">
+                <label class="form-label fw-bold text-dark">Password</label>
+                <div class="input-group">
+                    <input type="password" id="password" name="password" class="form-control border-0 shadow-none bg-light" required
+                        oninput="validateInput(this, /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{6,}$/, 'passwordError')">
+                    <span class="input-group-text bg-light border-0">
+                        <i id="eyeIcon1" class="bi bi-eye" onclick="togglePasswordVisibility('password', 'eyeIcon1')" style="cursor: pointer;"></i>
+                    </span>
+                </div>
+                <p class="text-danger small mt-1" id="passwordError" style="display: none;">Password must contain at least 1 uppercase letter, 1 lowercase letter, 1 number, 1 symbol, and be at least 6 characters long.</p>
+            </div>
+
+            <div class="mb-3 text-start">
+                <label class="form-label fw-bold text-dark">Confirm Password</label>
+                <div class="input-group">
+                    <input type="password" id="confirm_password" name="confirm_password" class="form-control border-0 shadow-none bg-light" required oninput="checkPasswordsMatch()">
+                    <span class="input-group-text bg-light border-0">
+                        <i id="eyeIcon2" class="bi bi-eye" onclick="togglePasswordVisibility('confirm_password', 'eyeIcon2')" style="cursor: pointer;"></i>
+                    </span>
+                </div>
+                <p class="text-danger small mt-1" id="confirmPasswordError" style="display: none;">Passwords do not match.</p>
+            </div>
+
+            <div class="mb-3 text-start">
+                <label class="form-label fw-bold text-dark">Security Question</label>
+                <select name="security_question" class="form-select border-0 shadow-none bg-light">
                     @foreach($securityQuestions as $question)
                         <option value="{{ $question }}">{{ $question }}</option>
                     @endforeach
                 </select>
-                <input type="text" name="security_answer" placeholder="Enter your answer">
-            </div>
-            <div class="checkbox-group">
-                <label for="agree">
-                    <input type="checkbox" id="agree" required>
-                    Yes, I would like to receive birthday specials, member exclusive offers, and the latest marketing and promotional offers from My Sony Rewards.
-                </label>
-                <p class="error" id="agreeError">You must agree to continue.</p>
+                <input type="text" name="security_answer" class="form-control border-0 shadow-none bg-light mt-2" placeholder="Enter your answer">
             </div>
 
-            <button class="btn" type="submit">Register</button>
-            <p style="margin-top: 15px; font-size: 14px;">
-                Already have an account? <a href="/login" style="color: #2841a7; font-weight: bold;">Log in here</a>
-            </p>
+            <div class="form-check text-start mt-3">
+                <input class="form-check-input" type="checkbox" id="agree" required>
+                <label class="form-check-label text-dark small" for="agree">
+                    Yes, I would like to receive birthday specials, member exclusive offers, and the latest promotions from Sport Indirect.
+                </label>
+                <p class="text-danger small mt-1" id="agreeError" style="display: none;">You must agree to continue.</p>
+            </div>
+
+            <button class="btn btn-primary w-100 mt-3" type="submit">Register</button>
+            <p class="mt-3 small">Already have an account? <a href="/login" class="text-primary text-decoration-none fw-bold">Log in here</a></p>
         </form>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

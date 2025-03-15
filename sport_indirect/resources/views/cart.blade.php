@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cart - Sport Indirect</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="{{ asset('css/cart.css') }}">
 </head>
 
@@ -36,31 +37,32 @@
     ];
 @endphp
 
-<div class="cart-container">
-    <h2 class="cart-title">Shopping Bag</h2>
+<div class="container mt-4">
+    <h2 class="text-center fw-bold">Shopping Bag</h2>
 
-    <div class="cart-content">
+    <div class="row">
         <!-- Cart Items -->
-        <div class="cart-items">
+        <div class="col-lg-8">
             @foreach ($cartItems as $item)
-            <div class="cart-item" data-id="{{ $item->id }}" data-base-price="{{ $item->price }}">
-                <div class="cart-item-details">
-                    <img src="{{ $item->image }}" alt="Product Image" class="cart-item-image">
-                    <div class="cart-item-info">
-                        <h5>{{ $item->name }}</h5>
-                        <p>{{ $item->category }}</p>
-                        <p>{{ $item->color }}</p>
-                        <p>Size: <strong>{{ $item->size }}</strong></p>
+            <div class="card mb-3 p-3 shadow-sm cart-item" data-id="{{ $item->id }}" data-base-price="{{ $item->price }}">
+                <div class="row g-3 align-items-center">
+                    <div class="col-md-2">
+                        <img src="{{ $item->image }}" alt="Product Image" class="img-fluid rounded">
                     </div>
-                </div>
-                <div class="cart-item-price">
-                    <!-- Display unit price (unchanged) -->
-                    <p class="price">RM {{ number_format($item->price, 2) }}</p>
-                    <div class="quantity-controls">
-                        <button class="quantity-btn minus-btn">-</button>
-                        <span class="quantity-value">{{ $item->quantity }}</span>
-                        <button class="quantity-btn plus-btn">+</button>
-                        <button class="delete-btn"><i class="bi bi-trash"></i></button>
+                    <div class="col-md-6">
+                        <h5 class="fw-bold">{{ $item->name }}</h5>
+                        <p class="text-muted">{{ $item->category }}</p>
+                        <p class="text-muted">{{ $item->color }}</p>
+                        <p class="text-muted">Size: <strong>{{ $item->size }}</strong></p>
+                    </div>
+                    <div class="col-md-4 text-end">
+                        <p class="fw-bold fs-5">RM {{ number_format($item->price, 2) }}</p>
+                        <div class="d-flex align-items-center justify-content-end">
+                            <button class="btn btn-outline-dark btn-sm minus-btn">-</button>
+                            <span class="mx-2 quantity-value">{{ $item->quantity }}</span>
+                            <button class="btn btn-dark btn-sm plus-btn">+</button>
+                            <button class="btn btn-danger btn-sm ms-2 delete-btn"><i class="bi bi-trash"></i></button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -68,27 +70,28 @@
         </div>
 
         <!-- Summary Section -->
-        <div class="cart-summary">
-            <h3>Summary</h3>
-            <!-- Container for item breakdown -->
-            <div id="itemSummaries"></div>
-            <hr>
-            <div class="summary-row total">
-                <h4>Total</h4>
-                <h4 id="finalTotal">RM 0.00</h4>
+        <div class="col-lg-4">
+            <div class="card p-4 shadow-sm">
+                <h3 class="fw-bold">Summary</h3>
+                <div id="itemSummaries"></div>
+                <hr>
+                <div class="d-flex justify-content-between fw-bold fs-5">
+                    <span>Total</span>
+                    <span id="finalTotal">RM 0.00</span>
+                </div>
+                <button class="btn btn-dark w-100 mt-3 checkout-btn" onclick="window.location.href='/checkout'">Checkout</button>
             </div>
-            <button class="checkout-btn member" onclick="window.location.href='/checkout'">Checkout</button>            </div>
+        </div>
     </div>
 </div>
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
 
-        // Function to update the summary breakdown and final total
         function updateSummary() {
             let total = 0;
             const summaryContainer = document.getElementById("itemSummaries");
-            summaryContainer.innerHTML = ""; // Clear existing summary
+            summaryContainer.innerHTML = "";
 
             document.querySelectorAll(".cart-item").forEach(item => {
                 let basePrice = parseFloat(item.getAttribute("data-base-price"));
@@ -96,36 +99,31 @@
                 let subTotal = basePrice * quantity;
                 total += subTotal;
 
-                // Create a row for this product's summary
                 let row = document.createElement("div");
-                row.classList.add("summary-row");
-                // For example: "Nike Dunk Low Retro: RM 489.00 x 2 = RM 978.00"
-                let productName = item.querySelector(".cart-item-info h5").textContent;
-                row.innerHTML = `<p>${productName}:</p>
-                                 <p>RM ${basePrice.toFixed(2)} x ${quantity} = RM ${subTotal.toFixed(2)}</p>`;
+                row.classList.add("d-flex", "justify-content-between");
+                let productName = item.querySelector("h5").textContent;
+                row.innerHTML = `<span>${productName}:</span>
+                                 <span>RM ${basePrice.toFixed(2)} x ${quantity} = RM ${subTotal.toFixed(2)}</span>`;
                 summaryContainer.appendChild(row);
             });
+
             document.getElementById("finalTotal").textContent = `RM ${total.toFixed(2)}`;
         }
 
-        // Initial update of summary
         updateSummary();
 
-        // Loop through each cart item to update quantity and recalc summary
         document.querySelectorAll(".cart-item").forEach((item) => {
             const minusBtn = item.querySelector(".minus-btn");
             const plusBtn = item.querySelector(".plus-btn");
             const quantitySpan = item.querySelector(".quantity-value");
-            const basePrice = parseFloat(item.getAttribute("data-base-price"));
             let quantity = parseInt(quantitySpan.textContent);
 
             minusBtn.addEventListener("click", function () {
-                quantity--;
-                if (quantity > 0) {
+                if (quantity > 1) {
+                    quantity--;
                     quantitySpan.textContent = quantity;
                     updateSummary();
                 } else {
-                    // Remove item from cart if quantity becomes 0
                     item.remove();
                     updateSummary();
                 }
@@ -139,4 +137,7 @@
         });
     });
 </script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 @endsection

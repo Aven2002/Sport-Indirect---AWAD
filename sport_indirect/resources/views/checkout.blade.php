@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Checkout - Sport Indirect</title>
-  <link rel="stylesheet" href="{{ asset('css/checkout.css') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Sport Indirect</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/checkout.css') }}">
 </head>
 
 @extends('layout.userlayout')
@@ -12,6 +13,7 @@
 @section('title', 'Checkout - Sport Indirect')
 
 @section('content')
+
 @php
     // Dummy cart data for frontend demonstration
     $cartItems = [
@@ -38,148 +40,143 @@
     ];
 @endphp
 
-<div class="container mt-5">
-    <h2 class="checkout-title">Check Out</h2>
+<div class="container mt-5 p-4 shadow rounded bg-white">
+    <h2 class="fw-bold text-center mb-4">Check Out</h2>
 
-    <!-- Order Summary as Receipt -->
-    <div id="order-summary" class="receipt">
-        <h4 class="receipt-header">Order Summary</h4>
+    <!-- Order Summary -->
+    <div id="order-summary" class="border p-3 bg-light rounded shadow-sm mb-4">
+        <h4 class="fw-bold text-center mb-3">Order Summary</h4>
         <div class="receipt-items">
             @foreach($cartItems as $item)
-            <div class="receipt-item">
-                <div class="receipt-item-info">
-                    <span class="receipt-item-name">{{ $item->name }}</span>
-                    <span class="receipt-item-size">Size: {{ $item->size }}</span>
+            <div class="d-flex justify-content-between border-bottom py-2">
+                <div>
+                    <strong>{{ $item->name }}</strong>
+                    <small class="d-block text-muted">Size: {{ $item->size }}</small>
                 </div>
-                <div class="receipt-item-details">
-                    <span class="receipt-item-qty">{{ $item->quantity }}</span> x 
-                    <span class="receipt-item-unit">RM {{ number_format($item->price, 2) }}</span>
-                    = <span class="receipt-item-subtotal">RM {{ number_format($item->price * $item->quantity, 2) }}</span>
+                <div>
+                    <span class="text-muted">{{ $item->quantity }} x RM {{ number_format($item->price, 2) }}</span> =
+                    <strong>RM {{ number_format($item->price * $item->quantity, 2) }}</strong>
                 </div>
             </div>
             @endforeach
         </div>
-        <div class="receipt-totals">
-            <div class="receipt-row">
+
+        <div class="mt-3">
+            <div class="d-flex justify-content-between">
                 <span>Subtotal:</span>
                 <span id="receiptSubtotal">RM 0.00</span>
             </div>
-            <div class="receipt-row">
+            <div class="d-flex justify-content-between">
                 <span>Delivery Fee:</span>
                 <span id="receiptDelivery">RM 10.00</span>
             </div>
-            <div class="receipt-row">
+            <div class="d-flex justify-content-between">
                 <span>Estimated Delivery:</span>
                 <span id="receiptDeliveryTime">3-5 days</span>
             </div>
             <hr>
-            <div class="receipt-row total">
+            <div class="d-flex justify-content-between fw-bold">
                 <strong>Total:</strong>
                 <strong id="receiptTotal">RM 0.00</strong>
             </div>
         </div>
-        <!-- Payment Button with loading effect -->
     </div>
 
-    <!-- Delivery Method Buttons -->
+    <!-- Delivery Method -->
     <h4 class="fw-bold">Delivery Method</h4>
-    <div class="mb-4 delivery-method-buttons">
-        <button class="btn delivery-btn active" onclick="selectMethod('delivery')">Delivery</button>
-        <button class="btn pickup-btn" onclick="selectMethod('pickup')">Pick Up</button>
+    <div class="btn-group w-100 mb-4">
+        <button class="btn btn-dark w-50" onclick="selectMethod('delivery')">Delivery</button>
+        <button class="btn btn-outline-dark w-50" onclick="selectMethod('pickup')">Pick Up</button>
     </div>
 
     <!-- Delivery Form -->
     <div id="delivery-form">
+        <h5 class="fw-bold">Select a Saved Address</h5>
+        <select class="form-select mb-3" id="saved-address" onchange="fillAddress()">
+            <option value="">Choose an Address</option>
+            <option value="John Doe, 123 Main Street, 012-3456789">John Doe - 123 Main Street</option>
+            <option value="Jane Smith, 456 Elm Street, 011-9876543">Jane Smith - 456 Elm Street</option>
+        </select>
+
         <h5 class="fw-bold">Delivery Information</h5>
-        <div>
-            <input type="text" class="form-control mb-2" placeholder="Full Name">
-        </div>
-        <div>
-            <input type="text" class="form-control mb-2" placeholder="Address">
-        </div>
-        <div>
-            <input type="text" class="form-control mb-2" placeholder="Phone Number">
-        </div>
+        <input type="text" class="form-control mb-3" id="fullName" placeholder="Full Name">
+        <input type="text" class="form-control mb-3" id="address" placeholder="Address">
+        <input type="text" class="form-control mb-3" id="phoneNumber" placeholder="Phone Number">
     </div>
 
     <!-- Pickup Form -->
-    <div id="pickup-form" style="display: none;">
+    <div id="pickup-form" class="d-none">
         <h5 class="fw-bold">Pick Up Information</h5>
-        <input type="text" class="form-control mb-2" placeholder="Enter Postcode" onkeyup="findBranch()">
-        <select class="form-control mb-2">
+        <input type="text" class="form-control mb-3" placeholder="Enter Postcode" onkeyup="findBranch()">
+        <select class="form-select mb-3">
             <option>Select Nearest Branch</option>
             <option>Kuala Lumpur</option>
             <option>Penang</option>
             <option>Johor Bahru</option>
         </select>
         <h6 class="fw-bold">Person Picking Up</h6>
-        <input type="text" class="form-control mb-2" placeholder="Full Name">
-        <input type="text" class="form-control mb-2" placeholder="Phone Number">
+        <input type="text" class="form-control mb-3" placeholder="Full Name">
+        <input type="text" class="form-control mb-3" placeholder="Phone Number">
     </div>
 
     <!-- Payment Section -->
-    <div>
-        <h4 class="fw-bold">Payment</h4>
-    </div>
-    <div>
-        <input type="text" class="form-control mb-2" placeholder="Promo Code (Optional)">
-    </div>
-    <div>
-        <select class="form-control mb-2">
-            <option>Credit/Debit Card</option>
-            <option>PayPal</option>
-            <option>Online Banking</option>
-            <option>GrabPay</option>
-        </select>
-    </div>
-    <button class="checkout-btn" id="paymentButton" onclick="processPayment()">Pay Now</button>
+    <h4 class="fw-bold">Payment</h4>
+    <input type="text" class="form-control mb-3" placeholder="Promo Code (Optional)">
+    <select class="form-select mb-3">
+        <option>Credit/Debit Card</option>
+        <option>PayPal</option>
+        <option>Online Banking</option>
+        <option>GrabPay</option>
+    </select>
+    <button class="btn btn-dark w-100" id="paymentButton" onclick="processPayment()">Pay Now</button>
 </div>
 
+<!-- JavaScript -->
 <script>
-    // Toggle between delivery and pickup forms via buttons
     function selectMethod(method) {
-        const deliveryBtn = document.querySelector('.delivery-btn');
-        const pickupBtn = document.querySelector('.pickup-btn');
-        const deliveryForm = document.getElementById('delivery-form');
-        const pickupForm = document.getElementById('pickup-form');
-
         if(method === 'delivery') {
-            deliveryBtn.classList.add('active');
-            pickupBtn.classList.remove('active');
-            deliveryForm.style.display = 'block';
-            pickupForm.style.display = 'none';
+            document.getElementById('delivery-form').classList.remove('d-none');
+            document.getElementById('pickup-form').classList.add('d-none');
         } else {
-            pickupBtn.classList.add('active');
-            deliveryBtn.classList.remove('active');
-            pickupForm.style.display = 'block';
-            deliveryForm.style.display = 'none';
+            document.getElementById('pickup-form').classList.remove('d-none');
+            document.getElementById('delivery-form').classList.add('d-none');
         }
     }
 
-    // Payment processing function: disable button, show loading state, then navigate
+    function fillAddress() {
+        let selected = document.getElementById("saved-address").value;
+        if (selected) {
+            let details = selected.split(", ");
+            document.getElementById("fullName").value = details[0];
+            document.getElementById("address").value = details[1];
+            document.getElementById("phoneNumber").value = details[2];
+        } else {
+            document.getElementById("fullName").value = "";
+            document.getElementById("address").value = "";
+            document.getElementById("phoneNumber").value = "";
+        }
+    }
+
     function processPayment() {
         const paymentButton = document.getElementById("paymentButton");
         paymentButton.disabled = true;
         paymentButton.textContent = "Processing...";
-        // Simulate payment processing delay (e.g., 2 seconds)
-        setTimeout(function() {
-            window.location.href = '/order';
-        }, 2000);
+        setTimeout(() => { window.location.href = '/order'; }, 2000);
     }
 
-    // Update receipt totals using dummy data from PHP
     document.addEventListener("DOMContentLoaded", function () {
         let subtotal = 0;
         @foreach($cartItems as $item)
             subtotal += {{ $item->price * $item->quantity }};
         @endforeach
-
         document.getElementById("receiptSubtotal").textContent = "RM " + subtotal.toFixed(2);
-        let deliveryFee = 10.00;
-        let total = subtotal + deliveryFee;
+        let total = subtotal + 10.00;
         document.getElementById("receiptTotal").textContent = "RM " + total.toFixed(2);
     });
 </script>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>

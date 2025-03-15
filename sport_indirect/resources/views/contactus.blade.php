@@ -1,41 +1,48 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>User Management - Sport Indirect</title>
-  <!-- Include any admin-specific CSS -->
-  <link rel="stylesheet" href="{{ asset('css/contactus.css') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Sport Indirect</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/contactus.css') }}">
 </head>
-<body>
+
 @extends('layout.userlayout')
 
 @section('content')
-<div class="contact-page">
-    <h2>Contact Us</h2>
-    <p>Please fill out the form below with your inquiry and we will get back to you as soon as possible.</p>
+<div class="container contact-page shadow-lg rounded">
+    <h2 class="fw-bold text-center">Contact Us</h2>
+    <p class="text-dark">Fill out the form below with your inquiry and we will get back to you soon.</p>
+
     <form action="#" method="POST">
-        <!-- For frontend demo, we're using a dummy action. -->
-        <div class="form-group">
-            <label for="name">Your Name:</label>
-            <input type="text" id="name" name="name" placeholder="Enter your name" required>
+        <div class="mb-3">
+            <label for="name" class="form-label fw-bold">Your Name:</label>
+            <input type="text" class="form-control" id="name" name="name" placeholder="Enter your name" required>
         </div>
-        <div class="form-group">
-            <label for="email">Your Email:</label>
-            <input type="email" id="email" name="email" placeholder="Enter your email" required>
+
+        <div class="mb-3">
+            <label for="email" class="form-label fw-bold">Your Email:</label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
         </div>
-        <div class="form-group">
-            <label for="subject">Subject:</label>
-            <input type="text" id="subject" name="subject" placeholder="Subject" required>
+
+        <div class="mb-3">
+            <label for="subject" class="form-label fw-bold">Subject:</label>
+            <input type="text" class="form-control" id="subject" name="subject" placeholder="Subject" required>
         </div>
-        <div class="form-group">
-            <label for="message">Your Message:</label>
-            <textarea id="message" name="message" placeholder="Type your message here" rows="5" required></textarea>
+
+        <div class="mb-3">
+            <label for="message" class="form-label fw-bold">Your Message:</label>
+            <textarea class="form-control" id="message" name="message" placeholder="Type your message here" rows="5" required></textarea>
         </div>
-        <button type="submit" class="btn submit-btn">Send Message</button>
+
+        <button type="submit" class="btn btn-primary w-100">Send Message</button>
     </form>
 </div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+@endsection
 </body>
 </html>
-@endsection

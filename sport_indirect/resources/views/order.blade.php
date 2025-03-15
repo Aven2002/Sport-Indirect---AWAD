@@ -4,135 +4,84 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Order - Sport Indirect</title>
-  <!-- Include any admin-specific CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="{{ asset('css/order.css') }}">
 </head>
 
 @extends('layout.userlayout')
 
 @section('content')
-<body>
+<body class="bg-light">
     @php
-        // Dummy order data for demonstration
-        $dummyOrders = [
-            (object)[
-                'id' => 1,
-                'order_id' => '#ORD1001',
-                'name' => 'Nike Dunk Low Retro',
-                'category' => "Men's Shoe",
-                'color' => 'White/White/Black',
-                'size' => '10',
-                'status' => 'To Pay',
-                'image' => '/images/product-placeholder.png'
-            ],
-            (object)[
-                'id' => 2,
-                'order_id' => '#ORD1002',
-                'name' => 'Nike Air Max',
-                'category' => "Men's Shoe",
-                'color' => 'Black/White',
-                'size' => '9',
-                'status' => 'To Ship',
-                'image' => '/images/product-placeholder.png'
-            ],
-            (object)[
-                'id' => 3,
-                'order_id' => '#ORD1003',
-                'name' => 'Nike Revolution',
-                'category' => "Men's Shoe",
-                'color' => 'Blue/White',
-                'size' => '10',
-                'status' => 'To Receive',
-                'image' => '/images/product-placeholder.png'
-            ],
-            (object)[
-                'id' => 4,
-                'order_id' => '#ORD1004',
-                'name' => 'Nike Zoom Fly',
-                'category' => "Men's Shoe",
-                'color' => 'Red/Black',
-                'size' => '10',
-                'status' => 'Completed',
-                'image' => '/images/product-placeholder.png'
-            ],
-            (object)[
-                'id' => 5,
-                'order_id' => '#ORD1005',
-                'name' => 'Nike Cortez',
-                'category' => "Men's Shoe",
-                'color' => 'White/Black',
-                'size' => '9',
-                'status' => 'Return/Refund',
-                'image' => '/images/product-placeholder.png'
-            ],
-            (object)[
-                'id' => 6,
-                'order_id' => '#ORD1006',
-                'name' => 'Nike Pegasus',
-                'category' => "Men's Shoe",
-                'color' => 'Grey/Black',
-                'size' => '10',
-                'status' => 'Cancelled',
-                'image' => '/images/product-placeholder.png'
-            ],
-        ];
-        $orders = collect($dummyOrders);
+        $orders = collect([
+            (object)['id' => 1, 'order_id' => '#ORD1001', 'name' => 'Nike Dunk Low Retro', 'category' => "Men's Shoe", 'color' => 'White/Black', 'size' => '10', 'status' => 'To Pay', 'image' => '/images/Nike Vomero 18.png'],
+            (object)['id' => 2, 'order_id' => '#ORD1002', 'name' => 'Nike Air Max', 'category' => "Men's Shoe", 'color' => 'Black/White', 'size' => '9', 'status' => 'To Ship', 'image' => '/images/Nike Vomero 18.png'],
+            (object)['id' => 3, 'order_id' => '#ORD1003', 'name' => 'Nike Revolution', 'category' => "Men's Shoe", 'color' => 'Blue/White', 'size' => '10', 'status' => 'To Receive', 'image' => '/images/Nike Vomero 18.png'],
+            (object)['id' => 4, 'order_id' => '#ORD1004', 'name' => 'Nike Zoom Fly', 'category' => "Men's Shoe", 'color' => 'Red/Black', 'size' => '10', 'status' => 'Completed', 'image' => '/images/Nike Vomero 18.png'],
+            (object)['id' => 5, 'order_id' => '#ORD1005', 'name' => 'Nike Cortez', 'category' => "Men's Shoe", 'color' => 'White/Black', 'size' => '9', 'status' => 'Return/Refund', 'image' => '/images/Nike Vomero 18.png'],
+            (object)['id' => 6, 'order_id' => '#ORD1006', 'name' => 'Nike Pegasus', 'category' => "Men's Shoe", 'color' => 'Grey/Black', 'size' => '10', 'status' => 'Cancelled', 'image' => '/images/Nike Vomero 18.png'],
+        ]);
+
         $statuses = ['To Pay', 'To Ship', 'To Receive', 'Completed', 'Return/Refund', 'Cancelled'];
-        $activeStatus = request()->query('status', 'To Receive'); // default to 'To Receive'
+        $activeStatus = request()->query('status', 'To Receive');
     @endphp
 
-    <div class="order-status-page">
-        <h2 class="page-title">Order Status</h2>
+    <div class="container my-4">
+        <h2 class="text-white text-center mb-4" style="font-weight: bold;">Order Status</h2>
 
         <!-- Order Status Navigation -->
-        <ul class="status-nav">
+        <ul class="nav nav-pills justify-content-center mb-4">
             @foreach($statuses as $status)
-            <li class="{{ $activeStatus == $status ? 'active' : '' }}">
-                <a href="{{ route('order') }}?status={{ urlencode($status) }}">
-                    {{ $status }} ({{ $orders->where('status', $status)->count() }})
-                </a>
-            </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ $activeStatus == $status ? 'active' : 'text-dark' }}" href="{{ route('order') }}?status={{ urlencode($status) }}">
+                        {{ $status }} ({{ $orders->where('status', $status)->count() }})
+                    </a>
+                </li>
             @endforeach
         </ul>
 
         <!-- Orders List Section -->
-        <div class="orders-list">
-            <h3>{{ $activeStatus }} Orders</h3>
-            @forelse($orders->where('status', $activeStatus) as $order)
-            <div class="order-card">
-                <div class="order-info">
-                    <!-- Product Details -->
-                    <div class="product-details">
-                        <img src="{{ $order->image }}" alt="Product Image" class="product-image">
-                        <div class="product-info">
-                            <h4>{{ $order->name }}</h4>
-                            <p>{{ $order->category }} - {{ $order->color }}</p>
-                            <p>Size: <strong>{{ $order->size }}</strong></p>
-                            <p>Order ID: <strong>{{ $order->order_id }}</strong></p>
-                        </div>
-                    </div>
-                    <!-- Current Location (dummy text) -->
-                    <div class="order-location">
-                        <h5>Current Location</h5>
-                        <p>Warehouse, City, State</p>
+        <h3 class="text-white">{{ $activeStatus }} Orders</h3>
+        @forelse($orders->where('status', $activeStatus) as $order)
+        <div class="card mb-3 shadow-sm">
+            <div class="card-body d-flex flex-column flex-md-row align-items-center justify-content-between">
+                
+                <!-- Product Details -->
+                <div class="d-flex align-items-center">
+                    <img src="{{ $order->image }}" alt="Product Image" class="img-thumbnail me-3" style="width: 100px; height: 100px;">
+                    <div>
+                        <h4 class="h5">{{ $order->name }}</h4>
+                        <p class="mb-1 text-muted">{{ $order->category }} - {{ $order->color }}</p>
+                        <p class="mb-1">Size: <strong>{{ $order->size }}</strong></p>
+                        <p class="mb-1">Order ID: <strong>{{ $order->order_id }}</strong></p>
                     </div>
                 </div>
+
+                <!-- Order Location (Static) -->
+                <div class="text-center text-md-start">
+                    <h5 class="h6 text-dark">Current Location</h5>
+                    <p class="mb-0 text-muted">Warehouse, City, State</p>
+                </div>
+
                 <!-- Order Actions -->
-                <div class="order-actions">
+                <div>
                     @if($activeStatus == 'To Receive')
-                        <button class="btn order-received-btn">Order Received</button>
+                        <button class="btn btn-success">Order Received</button>
                     @elseif($activeStatus == 'Return/Refund')
-                        <button class="btn return-refund-btn">Return / Refund</button>
+                        <button class="btn btn-danger">Return / Refund</button>
                     @else
-                        <button class="btn view-details-btn">View Details</button>
+                        <button class="btn btn-primary">View Details</button>
                     @endif
                 </div>
             </div>
-            @empty
-            <p>No orders found for "{{ $activeStatus }}".</p>
-            @endforelse
         </div>
+        @empty
+        <p class="text-center text-muted">No orders found for "{{ $activeStatus }}".</p>
+        @endforelse
     </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
 @endsection

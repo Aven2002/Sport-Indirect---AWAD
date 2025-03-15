@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Home - Sport Indirect</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="{{ asset('css/home.css') }}">
 </head>
 
@@ -13,89 +14,77 @@
 
 <body>
     <!-- Slideshow Section -->
-    <div class="slideshow-container">
-        <div class="slides">
-            <img src="{{ asset('images/banner1.jpg') }}" class="slide active">
-            <img src="{{ asset('images/banner2.jpg') }}" class="slide">
-            <img src="{{ asset('images/banner3.jpg') }}" class="slide">
-        </div>
-        
-        <!-- Controls (Left, Stop, Right) -->
-        <div class="controls">
-            <button class="prev" onclick="changeSlide(-1)">&#10094;</button>
-            <button class="stop" onclick="toggleSlideshow()">
-                <span id="stopIcon">⏸️</span>
+    <div class="container-fluid p-0 position-relative">
+        <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="{{ asset('images/banner1.jpg') }}" class="d-block w-100">
+                </div>
+                <div class="carousel-item">
+                    <img src="{{ asset('images/banner2.jpg') }}" class="d-block w-100">
+                </div>
+                <div class="carousel-item">
+                    <img src="{{ asset('images/banner3.jpg') }}" class="d-block w-100">
+                </div>
+            </div>
+            
+            <!-- Controls -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
             </button>
-            <button class="next" onclick="changeSlide(1)">&#10095;</button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                <span class="carousel-control-next-icon"></span>
+            </button>
         </div>
     </div>
 
     <!-- Featured Products -->
-    <section class="featured-products">
-        <h2 style="color:black">Featured Products</h2>
-        <div class="featured-container">
-            <div class="featured-item">
-                <img src="{{ asset('images/category-tennis.png') }}" alt="Product 1">
-                <h3>Product Name 1</h3>
-                <p>$99.99</p>
+    <section class="container text-center my-5">
+        <h2 class="text-white">Featured Products</h2>
+        <div class="row justify-content-center">
+            <div class="col-md-4">
+                <div class="card bg-dark text-white">
+                    <img src="{{ asset('images/category-tennis.png') }}" class="card-img-top">
+                    <div class="card-body">
+                        <h3>Product Name 1</h3>
+                        <p>$99.99</p>
+                    </div>
+                </div>
             </div>
-            <div class="featured-item">
-                <img src="{{ asset('images/category-tennis.png') }}" alt="Product 2">
-                <h3>Product Name 2</h3>
-                <p>$129.99</p>
+            <div class="col-md-4">
+                <div class="card bg-dark text-white">
+                    <img src="{{ asset('images/category-tennis.png') }}" class="card-img-top">
+                    <div class="card-body">
+                        <h3>Product Name 2</h3>
+                        <p>$129.99</p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Animated Product Introduction -->
-    <section class="animated-intro">
-        <h2 style="color:black">Our Latest Collection</h2>
-        <div class="animated-product">
-            <img src="{{ asset('images/animation.gif') }}" alt="Animated Product">
+    <section class="container text-center my-5">
+        <h2 class="text-white">Our Latest Collection</h2>
+        <div class="d-flex flex-column align-items-center">
+            <img src="{{ asset('images/animation.gif') }}" class="img-fluid w-75">
             <p>Experience the latest innovation in sports gear with our new collection. Designed for performance and comfort.</p>
         </div>
     </section>
 
     <!-- Sports Equipment Categories -->
-    <section class="categories">
-        <h2 style="color:black">Shop by Category</h2>
-        <div class="category-list">
-            <a href="{{ route('product', ['category' => 'man']) }}" class="category-item">🏀 Man</a>
-            <a href="{{ route('product', ['category' => 'women']) }}" class="category-item">⚽ Women</a>
-            <a href="{{ route('product', ['category' => 'kid']) }}" class="category-item">🎾 Kid</a>
+    <section class="container text-center my-5">
+        <h2 class="text-white">Shop by Category</h2>
+        <div class="d-flex justify-content-center gap-3 flex-wrap">
+            <a href="{{ route('product', ['category' => 'man']) }}" class="btn btn-dark">🏀 Man</a>
+            <a href="{{ route('womenproduct', ['category' => 'women']) }}" class="btn btn-dark">⚽ Women</a>
+            <a href="{{ route('kidproduct', ['category' => 'kid']) }}" class="btn btn-dark">🎾 Kid</a>
         </div>
     </section>
 
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Slideshow Script -->
-    <script>
-        let index = 0;
-        let autoSlide = setInterval(nextSlide, 5000); // Auto slide every 5 seconds
-        let slides = document.querySelectorAll(".slide");
-        let isPlaying = true;
-
-        function changeSlide(direction) {
-            slides[index].classList.remove("active");
-            index = (index + direction + slides.length) % slides.length;
-            slides[index].classList.add("active");
-        }
-
-        function nextSlide() {
-            changeSlide(1);
-        }
-
-        function toggleSlideshow() {
-            let stopIcon = document.getElementById("stopIcon");
-            if (isPlaying) {
-                clearInterval(autoSlide);
-                stopIcon.innerHTML = "▶️"; // Play Icon
-            } else {
-                autoSlide = setInterval(nextSlide, 5000);
-                stopIcon.innerHTML = "⏸️"; // Pause Icon
-            }
-            isPlaying = !isPlaying;
-        }
-    </script>
 </body>
 </html>
 @endsection

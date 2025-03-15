@@ -1,77 +1,58 @@
-/* General Styles */
+/* General Page Styling */
 body {
-    font-family: Arial, sans-serif;
-    background: white !important;
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fa !important;
     color: black;
-    margin: 0;
-    padding: 0;
 }
 
-/* Container */
+/* Main Container */
 .container {
     max-width: 800px;
-    margin: 30px auto;
+    margin-top: 3rem;
     padding: 20px;
-    background: white;
     border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-.checkout-title {
-    font-size: 28px;
-    font-weight: bold;
-    margin-bottom: 24px;
-    margin-top: -31px;
+/* Title */
+h2, h4, h5, h6 {
     color: #333;
 }
 
-/* Receipt (Order Summary) */
-#order-summary.receipt {
-    background: #f8f8f8;
-    color: black;
+/* Order Summary Card */
+#order-summary {
+    background: #fff;
     border-radius: 10px;
     padding: 20px;
-    margin-bottom: 20px;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+    color: black; /* Ensure text inside the order summary is black */
 }
 
-.receipt-header {
-    text-align: center;
-    margin-bottom: 20px;
-    font-size: 20px;
+/* Ensure all text in the receipt section is black */
+.receipt-items,
+.receipt-items * {
+    color: black !important;
+}
+
+.receipt-totals,
+.receipt-totals * {
+    color: black !important;
+}
+
+/* Ensuring subtotal, delivery fee, and total are also black */
+#receiptSubtotal,
+#receiptDelivery,
+#receiptDeliveryTime,
+#receiptTotal {
+    color: black !important;
     font-weight: bold;
 }
 
-.receipt-items {
-    border-bottom: 1px dashed #ccc;
-    margin-bottom: 20px;
-}
 
-.receipt-item {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
-}
-
-.receipt-item-info,
-.receipt-item-details {
-    font-size: 16px;
-}
-
-.receipt-totals .receipt-row {
-    display: flex;
-    justify-content: space-between;
-    margin: 5px 0;
-    font-size: 16px;
-}
-
-.receipt-totals .receipt-row.total {
-    font-size: 18px;
-    font-weight: bold;
-}
-
-/* Form Fields (inputs and selects) */
+/* Form Inputs & Selects */
 input, select {
     width: 100%;
-    padding: 12px;
+    padding: 10px;
     margin-top: 8px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -84,7 +65,6 @@ input, select {
     padding: 12px;
     width: 100%;
     font-size: 16px;
-    border: none;
     border-radius: 5px;
     margin-top: 15px;
     cursor: pointer;
@@ -95,47 +75,9 @@ input, select {
     background: #333;
 }
 
-/* Utility Classes */
-.fw-bold {
-    font-weight: bold;
-}
-
-.mt-5 {
-    margin-top: 3rem;
-}
-
-.mb-2 {
-    margin-bottom: 0.5rem;
-}
-
-.mb-4 {
-    margin-bottom: 1.5rem;
-}
-
-/* Order Item Styles */
-.order-item {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    padding: 10px 0;
-    border-bottom: 1px solid #ddd;
-}
-
-.order-item img {
-    width: 80px;
-    height: 80px;
-    border-radius: 8px;
-}
-
-/* Delivery & Pickup Forms */
-.delivery-method, .pickup-method {
-    margin-bottom: 20px;
-}
-
 /* Delivery Method Buttons */
 .delivery-method-buttons {
     display: flex;
-    justify-content: space-between;
     gap: 10px;
     margin-bottom: 20px;
 }
@@ -143,17 +85,31 @@ input, select {
 .delivery-method-buttons button {
     width: 48%;
     padding: 12px;
-    border: none;
     border-radius: 5px;
     font-size: 16px;
-    cursor: pointer;
-    transition: background 0.3s;
     background: #f2f2f2;
     color: #333;
+    transition: background 0.3s;
 }
 
 .delivery-method-buttons button.active,
 .delivery-method-buttons button:hover {
     background: #333;
     color: #fff;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        width: 100%;
+        padding: 15px;
+    }
+
+    .delivery-method-buttons {
+        flex-direction: column;
+    }
+
+    .delivery-method-buttons button {
+        width: 100%;
+    }
 }

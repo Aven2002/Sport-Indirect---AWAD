@@ -28,8 +28,6 @@ Route::get('/', function () {
     return view('home');
 })->name('home');
 
-use App\Http\Controllers\ProductController;
-
 Route::get('/product', function () {
     return view('product');
 })->name('product');
@@ -46,9 +44,13 @@ Route::get('/productdetail', function () {
     return view('productdetail');
 })->name('productdetail');
 
-use App\Http\Controllers\StoreController;
+Route::get('/profile', function () {
+    return view('profile');
+})->name('profile');
 
-Route::get('/findstore', [StoreController::class, 'index'])->name('findstore');
+Route::get('/findstore', function () {
+    return view('findstore');
+})->name('findstore');
 
 Route::get('/cart', function () {
     return view('cart');
@@ -58,21 +60,20 @@ Route::get('/checkout', function () {
     return view('checkout');
 });
 
-
 Route::get('/order', function () {
-    return view('order'); // Ensure this view exists in your resources/views directory.
+    return view('order'); 
 })->name('order');
 
 Route::get('/contactus', function () {
-    return view('contactus'); // Ensure this view exists in your resources/views directory.
+    return view('contactus'); 
 })->name('contactus');
 
 Route::get('/aboutus', function () {
-    return view('aboutus'); // Ensure this view exists in your resources/views directory.
+    return view('aboutus'); 
 })->name('aboutus');
 
 Route::get('/help', function () {
-    return view('help'); // Ensure this view exists in your resources/views directory.
+    return view('help'); 
 })->name('help');
 
 Route::prefix('admin')->name('admin.')->group(function() {
@@ -87,4 +88,8 @@ Route::prefix('admin')->name('admin.')->group(function() {
     Route::get('/user', function () {
         return view('adminuser');
     })->name('users.index');
+
+    Route::get('/location', function () {
+        return view('adminlocation');
+    })->name('locations.index');
 });

@@ -1,60 +1,47 @@
-/* Help Page Styles */
+/* Apply Bootstrap styles */
 body {
-    background: white !important; 
-    color: black; 
+    background-color: white !important;
+    color: black;
     font-family: Arial, sans-serif;
 }
 
+/* Help Page Container */
 .help-page {
     max-width: 800px;
     margin: 40px auto;
-    padding: 60px;
+    padding: 40px;
     background: #fff;
-    color: #000;
-    font-family: Arial, sans-serif;
     border-radius: 8px;
-    box-shadow: 0px 2px 8px rgb(0 0 0 / 64%);;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.64);
 }
 
-.help-page h1 {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.help-page p {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.help-search {
-    margin-bottom: 20px;
-}
-
+/* Search Box */
 .help-search input {
     width: 100%;
     padding: 12px;
-    border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 16px;
 }
 
+/* Help Results */
 .help-results {
     margin-top: 20px;
 }
 
-.help-result-item {
-    border-bottom: 1px solid #ccc;
-    padding: 15px 0;
+/* Individual Result Item */
+.list-group-item {
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
 }
 
-.help-result-item h3 {
-    margin: 0;
+/* Question Styling */
+.list-group-item h5 {
     font-size: 18px;
     color: #333;
 }
 
-.help-result-item p {
-    margin: 5px 0 0;
+/* Answer Styling */
+.list-group-item p {
     font-size: 16px;
     color: #555;
 }
