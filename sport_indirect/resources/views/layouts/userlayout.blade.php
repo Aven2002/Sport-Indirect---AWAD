@@ -13,10 +13,6 @@
   <!-- Top Navigation -->
   <div class="bg-dark text-white py-2 border-bottom border-white">
     <div class="container d-flex justify-content-end gap-3">
-      <a href="{{ route('findstore') }}" class="text-white text-decoration-none fw-bold">Find a Store</a>
-      <a href="help" class="text-white text-decoration-none fw-bold">Help</a>
-      <a href="{{ route('register') }}" class="text-white text-decoration-none fw-bold">Join Us</a>
-      <a href="{{ route('login') }}" class="text-white text-decoration-none fw-bold">Sign In</a>
     </div>
   </div>
 
@@ -32,9 +28,9 @@
       <!-- Category Navigation -->
       <nav class="d-flex gap-4">
         <a href="{{ url('/') }}" class="text-white text-decoration-none fw-bold">Home</a>
-        <a href="{{ route('product') }}" class="text-white text-decoration-none fw-bold">Men</a>
+        <!-- <a href="{{ route('product') }}" class="text-white text-decoration-none fw-bold">Men</a>
         <a href="{{ route('womenproduct') }}" class="text-white text-decoration-none fw-bold">Women</a>
-        <a href="{{ route('kidproduct') }}" class="text-white text-decoration-none fw-bold">Kids</a>
+        <a href="{{ route('kidproduct') }}" class="text-white text-decoration-none fw-bold">Kids</a> -->
       </nav>
 
       <!-- Search, Cart, Profile -->

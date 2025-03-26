@@ -92,7 +92,7 @@ class ProductSeeder extends Seeder
                 'productBrand' => 'LI- NING',
                 'description' => "Recommended Ball Amateur Competitions, Flight Stabilization, Clear Ball Feel",
                 'stock' => 30,
-                'imgPath' => 'Shuttlecock/LI- NING C60.png',
+                'imgPath' => 'Shuttlecock/LI- NING C80.png',
                 'equipPrice' => 89.00,
             ],
             [

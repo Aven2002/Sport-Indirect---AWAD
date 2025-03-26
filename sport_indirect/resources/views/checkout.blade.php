@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="{{ asset('css/checkout.css') }}">
 </head>
 
-@extends('layout.userlayout')
+@extends('layouts.user')
 
 @section('title', 'Checkout - Sport Indirect')
 

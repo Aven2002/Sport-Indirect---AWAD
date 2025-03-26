@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="{{ asset('css/order.css') }}">
 </head>
 
-@extends('layout.userlayout')
+@extends('layouts.user')
 
 @section('content')
 <body class="bg-light">
@@ -33,7 +33,7 @@
         <ul class="nav nav-pills justify-content-center mb-4">
             @foreach($statuses as $status)
                 <li class="nav-item">
-                    <a class="nav-link {{ $activeStatus == $status ? 'active' : 'text-dark' }}" href="{{ route('order') }}?status={{ urlencode($status) }}">
+                    <a class="nav-link {{ $activeStatus == $status ? 'active' : 'text-dark' }}" href="{{ url('order') }}?status={{ urlencode($status) }}">
                         {{ $status }} ({{ $orders->where('status', $status)->count() }})
                     </a>
                 </li>

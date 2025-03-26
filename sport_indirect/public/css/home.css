@@ -1,40 +1,10 @@
-/* General Styles */
-body {
-    background: white !important;
-    color: black;
-    font-family: Arial, sans-serif;
+.brand-logo {
+    width: 130px;  /* Adjust width for consistency */
+    height: 80px;  /* Maintain aspect ratio */
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
 }
 
-/* Carousel (Slideshow) */
-.carousel img {
-    height: 500px;
-    object-fit: cover;
-}
-
-/* Featured Products */
-.card {
-    border-radius: 10px;
-    overflow: hidden;
-}
-
-.card img {
-    width: 100%;
-    object-fit: cover;
-}
-
-/* Animated Introduction */
-.img-fluid {
-    border-radius: 10px;
-}
-
-/* Categories */
-.btn-dark {
-    padding: 10px 20px;
-    border-radius: 5px;
-    transition: 0.3s;
-}
-
-.btn-dark:hover {
-    background: gray;
-    color: white;
+.brand-logo:hover {
+    transform: scale(1.1); /* Slight zoom effect on hover */
 }

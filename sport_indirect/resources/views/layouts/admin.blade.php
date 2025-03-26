@@ -22,16 +22,16 @@
       <div class="container">
           <ul class="nav justify-content-center">
               <li class="nav-item">
-                  <a class="nav-link menu-btn px-4 py-2 border rounded" href="{{ route('admin.orders.index') }}">Orders</a>
+                  <a class="nav-link menu-btn px-4 py-2 border rounded" href="{{ url('admin.orders.index') }}">Orders</a>
               </li>
               <li class="nav-item">
-                  <a class="nav-link menu-btn px-4 py-2 border rounded" href="{{ route('admin.products.index') }}">Products</a>
+                  <a class="nav-link menu-btn px-4 py-2 border rounded" href="{{ ('admin.products.index') }}">Products</a>
               </li>
               <li class="nav-item">
-                  <a class="nav-link menu-btn px-4 py-2 border rounded" href="{{ route('admin.users.index') }}">Users</a>
+                  <a class="nav-link menu-btn px-4 py-2 border rounded" href="{{ ('admin.users.index') }}">Users</a>
               </li>
               <li class="nav-item">
-                  <a class="nav-link menu-btn px-4 py-2 border rounded" href="{{ route('admin.locations.index') }}">Locations</a>
+                  <a class="nav-link menu-btn px-4 py-2 border rounded" href="{{ ('admin.locations.index') }}">Locations</a>
               </li>
           </ul>
       </div>

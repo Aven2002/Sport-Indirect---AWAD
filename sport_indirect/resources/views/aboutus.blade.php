@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="{{ asset('css/aboutus.css') }}">
 </head>
 
-@extends('layout.userlayout')
+@extends('layouts.user')
 
 @section('content')
 

@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="{{ asset('css/home.css') }}">
 </head>
 
-@extends('layout.userlayout')
+@extends('layouts.user')
 
 @section('content')
 
@@ -18,25 +18,50 @@
         <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="{{ asset('images/banner1.jpg') }}" class="d-block w-100">
+                    <img src="{{ asset('images/banner1.jpg') }}" class="d-block w-100 img-fluid" alt="Banner 1">
                 </div>
                 <div class="carousel-item">
-                    <img src="{{ asset('images/banner2.jpg') }}" class="d-block w-100">
+                    <img src="{{ asset('images/banner2.jpg') }}" class="d-block w-100 img-fluid" alt="Banner 2">
                 </div>
                 <div class="carousel-item">
-                    <img src="{{ asset('images/banner3.jpg') }}" class="d-block w-100">
+                    <img src="{{ asset('images/banner3.jpg') }}" class="d-block w-100 img-fluid" alt="Banner 3">
                 </div>
             </div>
             
             <!-- Controls -->
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon"></span>
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
             </button>
             <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-                <span class="carousel-control-next-icon"></span>
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
             </button>
+            
+            <!-- Indicators -->
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="0" class="active"></button>
+                <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="1"></button>
+                <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="2"></button>
+            </div>
         </div>
     </div>
+
+    <!-- Popular Sports Brands -->
+    <div class="container my-5">
+    <h3 class="text-center mb-4">Popular Sports Brands</h3>
+    <div class="d-flex justify-content-center align-items-center flex-wrap gap-4">
+        <a href="{{ url('/products?brand=Adidas') }}">
+            <img src="{{ asset('images/Brand_Logo/YONEX.png') }}" class="brand-logo">
+        </a>
+        <a href="{{ url('/products?brand=Puma') }}">
+            <img src="{{ asset('images/Brand_Logo/LI- NING.png') }}" class="brand-logo">
+        </a>
+        <a href="{{ url('/products?brand=Under Armour') }}">
+            <img src="{{ asset('images/Brand_Logo/VICTOR.png') }}" class="brand-logo">
+        </a>
+    </div>
+</div>
 
     <!-- Featured Products -->
     <section class="container text-center my-5">
@@ -72,15 +97,6 @@
         </div>
     </section>
 
-    <!-- Sports Equipment Categories -->
-    <section class="container text-center my-5">
-        <h2 class="text-white">Shop by Category</h2>
-        <div class="d-flex justify-content-center gap-3 flex-wrap">
-            <a href="{{ route('product', ['category' => 'man']) }}" class="btn btn-dark">🏀 Man</a>
-            <a href="{{ route('womenproduct', ['category' => 'women']) }}" class="btn btn-dark">⚽ Women</a>
-            <a href="{{ route('kidproduct', ['category' => 'kid']) }}" class="btn btn-dark">🎾 Kid</a>
-        </div>
-    </section>
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

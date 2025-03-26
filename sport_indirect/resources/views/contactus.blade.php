@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="{{ asset('css/contactus.css') }}">
 </head>
 
-@extends('layout.userlayout')
+@extends('layouts.user')
 
 @section('content')
 <div class="container contact-page shadow-lg rounded">

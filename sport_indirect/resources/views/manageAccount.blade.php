@@ -8,7 +8,7 @@
 
 </head>
 
-@extends('layout.adminlayout')
+@extends('layouts.admin')
 
 @section('title', 'User Management - Sport Indirect')
 

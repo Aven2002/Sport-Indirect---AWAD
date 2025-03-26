@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
 </head>
 
-@extends('layout.userlayout')
+@extends('layouts.user')
 
 @section('title', 'User Profile')
 

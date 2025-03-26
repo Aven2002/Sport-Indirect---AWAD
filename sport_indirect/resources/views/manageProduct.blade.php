@@ -9,7 +9,7 @@
 
 </head>
 
-@extends('layout.adminlayout')
+@extends('layouts.admin')
 
 @section('title', 'Product Management - Sport Indirect')
 
