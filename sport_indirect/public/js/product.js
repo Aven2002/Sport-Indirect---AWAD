@@ -24,7 +24,7 @@ function renderProducts(products) {
         let productCard = `
             <div class="col-md-4 col-sm-6 mb-4 product-card" data-category="${product.productCategory}">
                 <div class="card shadow">
-                    <img src="/images/${product.product_detail.imgPath}" class="card-img-top" alt="${product.productName}">
+                    <img src="/images/${product.product_detail.imgPath}" class="card-img-top" alt="${product.product_detail.imgPath}">
                     <div class="card-body text-center">
                         <h4 class="card-title">${product.productName}</h4>
                         <p class="fw-bold">RM ${parseFloat(product.product_detail.equipPrice).toFixed(2)}</p>

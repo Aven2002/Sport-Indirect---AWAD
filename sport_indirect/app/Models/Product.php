@@ -13,6 +13,7 @@ class Product extends Model
 
     protected $fillable = [
         'productName',
+        'sportCategory',
         'productCategory',
         'productBrand',
         'created_at',

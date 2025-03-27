@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string('productName',50)->unique();
+            $table->string('sportCategory',50);
             $table->string('productCategory',50);
             $table->string('productBrand',50);
             $table->timestamps();
