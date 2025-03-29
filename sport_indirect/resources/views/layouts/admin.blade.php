@@ -12,7 +12,7 @@
   <!-- Admin Header -->
   <header class="admin-header bg-dark text-white py-3">
       <div class="container d-flex align-items-center justify-content-center gap-3">
-          <img src="{{ asset('images/logo.png') }}" alt="Logo" class="admin-logo" width="70">
+          <img src="{{ asset('images/ComLogo.png') }}" alt="Logo" class="admin-logo" width="70">
           <h1 class="fs-2 fw-bold mb-0">Admin Dashboard</h1>
       </div>
   </header>

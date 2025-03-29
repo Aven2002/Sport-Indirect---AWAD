@@ -54,6 +54,8 @@ Route::delete('/address/{id}',[AddressController::class,'destroy']);
 
 //Feedback
 Route::get('/feedback',[FeedbackController::class,'index']);
+Route::get('/feedback/unread',[FeedbackController::class,'unreadCount']);
+Route::get('/feedback/{id}',[FeedbackController::class,'getFeedback']);
 Route::delete('/feedback/{id}',[FeedbackController::class,'destroy']);
 Route::post('/feedback',[FeedbackController::class,'store']);
 Route::put('/feedback/{id}',[FeedbackController::class,'updateStatus']);

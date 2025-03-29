@@ -116,4 +116,45 @@ public function updateStatus(Request $request, $id)
     }
 }
 
+/**
+ * Count the unread feedback
+ */
+public function unreadCount()
+{
+    $unreadFeedbacks = Feedback::where('status', false)->pluck('id');
+
+    return response()->json([
+        'unread_count' => $unreadFeedbacks->count(),
+        'unread_ids' => $unreadFeedbacks
+    ]);
+}
+
+
+/**
+ * Retrieve the specific's feedback
+ */
+public function getFeedback($id)
+{
+    try{
+        $feedback = Feedback::find($id);
+
+        if(!$feedback){
+            return response()->json([
+                'message'=>'Feedback not found'
+            ],404);
+        }
+
+        return response()->json([
+            'message'=>'Feedback retrieved successsfully',
+            'feedback'=>$feedback
+        ],200);
+    }catch(\Exception $e)
+    {
+        return response()->json([
+            'message'=>'Something went wrong',
+            'error'=>$e->getMessage()
+        ],500);
+    }
+}
+
 }
