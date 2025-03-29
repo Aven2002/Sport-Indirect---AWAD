@@ -8,6 +8,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AddressController;
+use App\Http\Controllers\FeedbackController;
 
 //Profile
 Route::get('/profile/{id}',[ProfileController::class,'getProfile']);
@@ -50,3 +51,9 @@ Route::get('/address/{id}',[AddressController::class,'getUserAddressBook']);
 Route::post('/address',[AddressController::class,'store']);
 Route::put('/address/{id}',[AddressController::class,'update']);
 Route::delete('/address/{id}',[AddressController::class,'destroy']);
+
+//Feedback
+Route::get('/feedback',[FeedbackController::class,'index']);
+Route::delete('/feedback/{id}',[FeedbackController::class,'destroy']);
+Route::post('/feedback',[FeedbackController::class,'store']);
+Route::put('/feedback/{id}',[FeedbackController::class,'updateStatus']);

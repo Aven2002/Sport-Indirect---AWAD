@@ -81,6 +81,7 @@ class StoreController extends Controller
 
             // Update store with validated data
             $store->update($validatedData);
+            $store->save();
 
             // Success response
             return response()->json([
