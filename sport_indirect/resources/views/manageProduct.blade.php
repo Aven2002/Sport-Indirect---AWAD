@@ -1,165 +1,186 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Product Management - Sport Indirect</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-</head>
-
 @extends('layouts.admin')
 
 @section('title', 'Product Management - Sport Indirect')
 
 @section('content')
+<div class="container mt-2">
+    <h1 class="text-center">Product Management</h1>
+<!-- Add Product Button -->
+<button class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#createProductModal">
+    Add New Product
+</button>
 
-@php
-    // Dummy products for frontend demo
-    $dummyProducts = [
-        (object)[ 'id' => 1, 'name' => 'Product 1', 'description' => 'Description for product 1', 'price' => 100.00, 'image' => '/images/dummy1.jpg' ],
-        (object)[ 'id' => 2, 'name' => 'Product 2', 'description' => 'Description for product 2', 'price' => 200.00, 'image' => '/images/dummy2.jpg' ],
-        (object)[ 'id' => 3, 'name' => 'Product 3', 'description' => 'Description for product 3', 'price' => 150.00, 'image' => '/images/dummy3.jpg' ]
-    ];
-@endphp
-
-<div class="container my-5">
-    <h1 class="text-center mb-4">Product Management</h1>
-    
-    <!-- Top Buttons: Create and Search Product -->
-    <div class="text-center mb-4">
-        <button class="btn btn-primary me-2" onclick="toggleCreateForm()">Create New Product</button>
-        <button class="btn btn-secondary" onclick="toggleSearchForm()">Search Product</button>
-    </div>
-    
-    <!-- Create Product Form -->
-    <div id="createForm" class="border p-4 mb-4 bg-light rounded" style="display: none;">
-        <h2>Create New Product</h2>
-        <form action="#" method="POST" enctype="multipart/form-data">
-            @csrf
-            <div class="mb-3">
-                <label for="name" class="form-label">Product Name</label>
-                <input type="text" name="name" id="name" class="form-control" required>
-            </div>
-            <div class="mb-3">
-                <label for="description" class="form-label">Description</label>
-                <textarea name="description" id="description" class="form-control" required></textarea>
-            </div>
-            <div class="mb-3">
-                <label for="price" class="form-label">Price (RM)</label>
-                <input type="number" step="0.01" name="price" id="price" class="form-control" required>
-            </div>
-            <div class="mb-3">
-                <label for="image" class="form-label">Product Image</label>
-                <input type="file" name="image" id="image" class="form-control" accept="image/*" required>
-            </div>
-            <button type="submit" class="btn btn-success">Create Product</button>
-            <button type="button" class="btn btn-danger" onclick="toggleCreateForm()">Cancel</button>
-        </form>
-    </div>
-    
-    <!-- Search Product Form -->
-    <div id="searchForm" class="border p-4 mb-4 bg-light rounded" style="display: none;">
-        <h2>Search Product</h2>
-        <form onsubmit="searchProduct(event)">
-            <div class="mb-3">
-                <label for="searchQuery" class="form-label">Product Name or ID</label>
-                <input type="text" name="search_query" id="searchQuery" class="form-control" required>
-            </div>
-            <button type="submit" class="btn btn-primary">Search</button>
-            <button type="button" class="btn btn-danger" onclick="toggleSearchForm()">Cancel</button>
-        </form>
-    </div>
-    
     <!-- Product List Table -->
-    <table class="table table-striped table-hover">
-        <thead class="table-dark">
+    <table class="table table-bordered mt-4">
+        <thead class="table-dark text-center">
             <tr>
                 <th>ID</th>
                 <th>Name</th>
-                <th>Description</th>
-                <th>Price (RM)</th>
-                <th>Image</th>
+                <th>Sport</th>
+                <th>Category</th>
+                <th>Brand</th>
+                <th>Stock</th>
+                <th>Price</th>
+                <th>Created At</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody id="productTableBody">
-            @foreach ($dummyProducts as $product)
-            <tr class="product-row" data-product-id="{{ $product->id }}" data-name="{{ $product->name }}"
-                data-description="{{ $product->description }}" data-price="{{ $product->price }}" 
-                data-image="{{ asset($product->image) }}">
-                <td>{{ $product->id }}</td>
-                <td>{{ $product->name }}</td>
-                <td>{{ $product->description }}</td>
-                <td>{{ number_format($product->price, 2) }}</td>
-                <td><img src="{{ asset($product->image) }}" alt="{{ $product->name }}" class="img-thumbnail" style="width: 60px;"></td>
-                <td>
-                    <a href="#" class="btn btn-warning btn-sm" onclick="showEditProductModal(this)">Edit</a>
-                    <button type="button" class="btn btn-danger btn-sm">Delete</button>
-                </td>
-            </tr>
-            @endforeach
+            <!-- Product data will be inserted here -->
         </tbody>
     </table>
+
+    <!-- Bootstrap Pagination -->
+    <nav>
+        <ul class="pagination justify-content-center" id="pagination">
+            <!-- Pagination buttons will be generated dynamically -->
+        </ul>
+    </nav>
+
 </div>
 
-<!-- Edit Product Modal -->
-<div id="editProductModal" class="modal" style="display: none;">
+<!-- Product View Modal -->
+<div class="modal fade" id="viewProductModal" tabindex="-1" aria-labelledby="viewProductLabel" aria-hidden="true">
     <div class="modal-dialog">
-        <div class="modal-content p-4">
-            <h3>Edit Product</h3>
-            <form id="editProductForm" onsubmit="saveProductEdit(event)">
-                <input type="hidden" id="editProductId">
-                <div class="mb-3">
-                    <label for="editProductName" class="form-label">Product Name</label>
-                    <input type="text" id="editProductName" class="form-control" required>
-                </div>
-                <div class="mb-3">
-                    <label for="editProductDescription" class="form-label">Description</label>
-                    <textarea id="editProductDescription" class="form-control" required></textarea>
-                </div>
-                <div class="mb-3">
-                    <label for="editProductPrice" class="form-label">Price (RM)</label>
-                    <input type="number" step="0.01" id="editProductPrice" class="form-control" required>
-                </div>
-                <div class="mb-3">
-                    <label for="editProductImage" class="form-label">Image URL</label>
-                    <input type="text" id="editProductImage" class="form-control" required>
-                </div>
-                <button type="submit" class="btn btn-success">Save</button>
-                <button type="button" class="btn btn-danger" onclick="closeEditModal()">Cancel</button>
-            </form>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Product Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center">
+                <h4 id="productName"class="text-muted text-start text-justify"></h4>
+                <img id="productImage" class="img-fluid rounded mb-3 product-img" alt="Product Image">
+                <p id="productDescription" class="text-muted text-start text-justify"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
         </div>
     </div>
 </div>
 
-<script>
-    function toggleCreateForm() {
-        var createForm = document.getElementById('createForm');
-        var searchForm = document.getElementById('searchForm');
+<!-- Update Product Modal -->
+<div class="modal fade" id="updateProductModal" tabindex="-1" aria-labelledby="updateProductLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Update Product</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="updateProductForm">
+                    <input type="hidden" id="updateProductId">
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Product Name</label>
+                        <input type="text" id="updateProductName" class="form-control" required>
+                    </div>
 
-        // Close the search form when opening the create form
-        searchForm.style.display = 'none';
+                    <div class="mb-3">
+                        <label class="form-label">Sport Category</label>
+                        <input type="text" id="updateSportCategory" class="form-control" required>
+                    </div>
 
-        // Toggle create form visibility
-        createForm.style.display = (createForm.style.display === 'block') ? 'none' : 'block';
+                    <div class="mb-3">
+                        <label class="form-label">Product Category</label>
+                        <input type="text" id="updateProductCategory" class="form-control" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Product Brand</label>
+                        <input type="text" id="updateProductBrand" class="form-control" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Stock</label>
+                        <input type="number" id="updateStock" class="form-control" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Price</label>
+                        <input type="text" id="updateEquipPrice" class="form-control" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Description</label>
+                        <textarea id="updateDescription" class="form-control" rows="3"></textarea>
+                    </div>
+
+                    <div class="d-flex justify-content-between">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Create Product Modal -->
+<div class="modal fade" id="createProductModal" tabindex="-1" aria-labelledby="createProductModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="createProductModalLabel">Add New Product</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="createProductForm" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="createProductName" class="form-label">Product Name</label>
+                        <input type="text" class="form-control" id="createProductName" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="createSportCategory" class="form-label">Sport Category</label>
+                        <input type="text" class="form-control" id="createSportCategory" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="createProductCategory" class="form-label">Product Category</label>
+                        <input type="text" class="form-control" id="createProductCategory" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="createProductBrand" class="form-label">Brand</label>
+                        <input type="text" class="form-control" id="createProductBrand" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="createStock" class="form-label">Stock</label>
+                        <input type="number" class="form-control" id="createStock" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="createEquipPrice" class="form-label">Price</label>
+                        <input type="number" class="form-control" id="createEquipPrice" step="0.01" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="createDescription" class="form-label">Description</label>
+                        <textarea class="form-control" id="createDescription" rows="3"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="createProductImage" class="form-label">Upload Product Image</label>
+                        <input type="file" class="form-control" id="createProductImage" accept="image/*" required>
+                        <small class="text-muted">Only JPG, PNG, and JPEG files are allowed.</small>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Add Product</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .product-img {
+        max-width: 100%;  
+        max-height: 300px; 
+        object-fit: cover; 
     }
-
-    function toggleSearchForm() {
-        var createForm = document.getElementById('createForm');
-        var searchForm = document.getElementById('searchForm');
-
-        // Close the create form when opening the search form
-        createForm.style.display = 'none';
-
-        // Toggle search form visibility
-        searchForm.style.display = (searchForm.style.display === 'block') ? 'none' : 'block';
+    
+    .text-justify {
+        text-align: justify;
     }
+</style>
 
-
-    function closeEditModal() {
-        document.getElementById('editProductModal').style.display = 'none';
-    }
-</script>
+<!-- Bootstrap & Axios -->
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="{{ asset('js/productManagement.js') }}"></script>
 @endsection
+
+
