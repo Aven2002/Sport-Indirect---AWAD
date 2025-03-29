@@ -157,6 +157,17 @@ class ProductController extends Controller
             'error'=>$e->getMessage()],500);
       }
     }
+
+    /**
+      * Filter product by brand
+      */
+      public function filterByBrand($brand)
+      {
+          $products = Product::where('productBrand', $brand)->with('category')->get(); // Eager load category if needed
+          return view('products', compact('products', 'brand'));
+      }
+      
+
 }
 
 

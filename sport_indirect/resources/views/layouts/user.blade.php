@@ -17,8 +17,7 @@
             
             <!-- Logo -->
             <a href="{{ url('/') }}" class="d-flex align-items-center text-white text-decoration-none">
-                <img src="{{ asset('images/logo.png') }}" alt="Sport Indirect Logo" height="85" width="100">
-                <h1 class="fs-4 ms-2 mb-0">SPORT INDIRECT</h1>
+                <img src="{{ asset('images/comLogo.png') }}" alt="Sport Indirect Logo" height="100" width="300">
             </a>
 
             <!-- Search Bar -->
@@ -34,13 +33,13 @@
             <!-- Location & Cart & Profile Icons -->
             <div class="d-flex gap-4 align-items-center">
                 <a href="{{ url('/store') }}" class="fs-5 text-white text-decoration-none d-flex align-items-center gap-1">
-                    <i class="bi bi-geo-alt"></i> 
+                    <i class="bi bi-geo-alt fs-4"></i> 
                 </a>
                 <a href="{{ url('/cart') }}" class="fs-5 text-white text-decoration-none d-flex align-items-center gap-1">
-                    <i class="bi bi-cart"></i> 
+                    <i class="bi bi-cart fs-4"></i> 
                 </a>
                 <a href="{{ url('/profile') }}" class="fs-5 text-white text-decoration-none d-flex align-items-center gap-1">
-                    <i class="bi bi-person-lines-fill"></i>
+                    <i class="bi bi-person-lines-fill fs-4"></i>
                 </a>
             </div>
         </div>

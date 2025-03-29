@@ -56,30 +56,32 @@ document.getElementById("sort").addEventListener("change", function () {
     applyFilters();
 });
 
+function filterByBrand(products) {
+    if (selectedBrand) {
+        return products.filter(product => product.productBrand === selectedBrand);
+    }
+    return products;
+}
+
 function applyFilters() {
     let filteredProducts = [...productsData];
 
-    // Apply Category Filter
     if (currentCategory !== "All") {
         filteredProducts = filteredProducts.filter(product => product.productCategory === currentCategory);
     }
 
-    // Apply Sorting
     const sortBy = document.getElementById("sort").value;
     if (sortBy === "newest") {
-        filteredProducts.sort((a, b) => {
-            let dateA = new Date(a.created_at);
-            let dateB = new Date(b.created_at);
-            if (dateB - dateA !== 0) {
-                return dateB - dateA;
-            }
-            return parseFloat(b.product_detail.equipPrice) - parseFloat(a.product_detail.equipPrice);
-        });
+        filteredProducts.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
     } else if (sortBy === "high-low") {
         filteredProducts.sort((a, b) => parseFloat(b.product_detail.equipPrice) - parseFloat(a.product_detail.equipPrice));
     } else if (sortBy === "low-high") {
         filteredProducts.sort((a, b) => parseFloat(a.product_detail.equipPrice) - parseFloat(b.product_detail.equipPrice));
     }
 
+    // Apply brand filtering using new function
+    filteredProducts = filterByBrand(filteredProducts);
+
     renderProducts(filteredProducts);
 }
+

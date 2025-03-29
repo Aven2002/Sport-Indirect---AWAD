@@ -51,15 +51,65 @@
     <div class="container my-5">
     <h3 class="text-center mb-4">Popular Sports Brands</h3>
     <div class="d-flex justify-content-center align-items-center flex-wrap gap-4">
-        <a href="{{ url('/products?brand=Adidas') }}">
-            <img src="{{ asset('images/Brand_Logo/YONEX.png') }}" class="brand-logo">
+        <a href="{{ url('/products?brand=YONEX') }}">
+        <img src="{{ asset('images/Brand_Logo/YONEX.png') }}" class="brand-logo">
         </a>
-        <a href="{{ url('/products?brand=Puma') }}">
+        <a href="{{ url('/products?brand=LI- NING') }}">
             <img src="{{ asset('images/Brand_Logo/LI- NING.png') }}" class="brand-logo">
         </a>
-        <a href="{{ url('/products?brand=Under Armour') }}">
+        <a href="{{ url('/products?brand=VICTOR') }}">
             <img src="{{ asset('images/Brand_Logo/VICTOR.png') }}" class="brand-logo">
         </a>
+        <a href="{{ url('/products?brand=WILSON') }}">
+            <img src="{{ asset('images/Brand_Logo/WILSON.png') }}" class="brand-logo">
+        </a>
+    </div>
+
+    <!-- Shop by Sports -->
+    <div class="container my-5">
+    <h3 class="text-center mb-4">Shop by Sports</h3>
+    <div class="d-flex justify-content-center align-items-center flex-wrap gap-4">
+        <a href="{{ url('/products?brand=YONEX') }}">
+        <img src="{{ asset('images/Sports/Badminton.png') }}" class="sport-logo">
+        </a>
+        <a href="{{ url('/products?brand=LI- NING') }}">
+            <img src="{{ asset('images/Sports/Basketball.png') }}" class="sport-logo">
+        </a>
+        <a href="{{ url('/products?brand=VICTOR') }}">
+            <img src="{{ asset('images/Sports/Golf.png') }}" class="sport-logo">
+        </a>
+        <a href="{{ url('/products?brand=WILSON') }}">
+            <img src="{{ asset('images/Sports/Tennis.png') }}" class="sport-logo">
+        </a>
+        <a href="{{ url('/products?brand=WILSON') }}">
+            <img src="{{ asset('images/Sports/Pickleball.png') }}" class="sport-logo">
+        </a>
+    </div>
+
+    <!-- Trending Now -->
+    <div class="container my-5">
+        <h3 class="text-left mb-4">Trending Now</h3>
+
+        <div id="productCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner" id="carousel-items">
+                <!-- Products will be dynamically added here -->
+            </div>
+            
+            <!-- Left and Right Controls -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#productCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            </button>
+        </div>
+    </div>
+
+    <!-- New Arrivals -->
+    <div class="container my-5">
+    <h3 class="text-center mb-4">New Arrivals</h3>
+    <div class="d-flex justify-content-center align-items-center flex-wrap gap-4">
+      
     </div>
 </div>
 
@@ -100,6 +150,8 @@
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="{{ asset('js/home.js') }}"></script>
 
 </body>
 </html>
