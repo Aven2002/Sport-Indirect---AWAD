@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\StoreLocation; 
+use App\Models\Store; 
 
 class StoreController extends Controller
 {
@@ -12,7 +12,7 @@ class StoreController extends Controller
      */
     public function index()
     {
-        $stores = StoreLocation::all(); 
+        $stores = Store::all(); 
         return response()->json($stores);
     }
 
@@ -27,11 +27,12 @@ class StoreController extends Controller
                 'storeName' => 'required|string|max:50',
                 'imgPath' => 'required|string',
                 'address' => 'required|string',
+                'operation' => 'required|string',
                 'phoneNo' => 'nullable|string',
             ]);
 
             // Create store record
-            $store = StoreLocation::create($validatedData);
+            $store = Store::create($validatedData);
 
             // Success response
             return response()->json([
@@ -62,7 +63,7 @@ class StoreController extends Controller
     {
         try {
             // Find store by ID
-            $store = StoreLocation::find($id);
+            $store = Store::find($id);
 
             // Check if store exists
             if (!$store) {
@@ -76,6 +77,7 @@ class StoreController extends Controller
                 'storeName' => 'required|string|max:50',
                 'imgPath' => 'required|string',
                 'address' => 'required|string',
+                'operation' => 'required|string',
                 'phoneNo' => 'nullable|string',
             ]);
 
@@ -105,7 +107,7 @@ class StoreController extends Controller
     {
         try {
             // Find store by ID
-            $store = StoreLocation::find($id);
+            $store = Store::find($id);
 
             if (!$store) {
                 return response()->json([
@@ -127,6 +129,33 @@ class StoreController extends Controller
                 'message' => 'Something went wrong!',
                 'error' => $e->getMessage()
             ], 500);
+        }
+    }
+
+    /**
+     * Retrieve specific store's info
+     */
+    public function getStore($id)
+    {
+        try{
+            $store = Store::find($id);
+
+            if(!$store){
+                return response()->json([
+                    'message' => 'Store record not found'
+                ], 404);
+            }
+
+            return response()->json([
+                'message'=>'Store record retrieve successfully',
+                'store'=>$store
+            ], 200);
+        }catch(\Exception $e)
+        {
+            return response()->json([
+                'message'=>'Something went wrong',
+                'error'=>$e->getMessage()
+            ],500);
         }
     }
 

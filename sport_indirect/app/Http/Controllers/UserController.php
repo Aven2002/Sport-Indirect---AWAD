@@ -58,7 +58,8 @@ class UserController extends Controller
                 'username' => 'required|string|max:30|unique:users,username',
                 'password' => 'required|string|min:6|confirmed',
                 'dob' => 'nullable|date',
-                'security_answers' => 'required|json'
+                'security_answers' => 'required|json',
+                'profileImg' => 'nullable|string',
             ]);
 
             // Hash the password before saving

@@ -21,6 +21,7 @@ Route::delete('/user/{id}',[UserController::class,'destroy']);
 
 //Store 
 Route::get('/stores', [StoreController::class, 'index']);
+Route::get('/stores/{id}',[StoreController::class, 'getStore']);
 Route::post('/stores', [StoreController::class, 'store']);
 Route::delete('/stores/{id}', [StoreController::class, 'destroy']);
 Route::put('/stores/{id}', [StoreController::class, 'update']);

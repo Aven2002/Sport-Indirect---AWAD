@@ -14,7 +14,7 @@ function loadProducts() {
         })
         .catch(() => {
             document.querySelector("#productTableBody").innerHTML = 
-                `<tr><td colspan="9" class="text-center text-danger">Failed to load products.</td></tr>`;
+                `<tr><td colspan="9" class="text-center text-danger">Failed to load product records.</td></tr>`;
         });
 }
 
@@ -41,7 +41,6 @@ function displayTable() {
                 <td>${product.productBrand}</td>
                 <td>${product.product_detail ? product.product_detail.stock : 'N/A'}</td>
                 <td>${product.product_detail ? product.product_detail.equipPrice : 'N/A'}</td>
-                <td>${new Date(product.created_at).toLocaleString()}</td>
                 <td class="text-center">
                     <div class="d-flex justify-content-center align-items-center gap-2">
                         <button class="btn btn-info btn-sm" onclick="viewProduct(${product.id})">More</button>
@@ -114,15 +113,16 @@ function viewProduct(productId) {
 }
 
 window.deleteProduct = function (id) {
-    if (confirm("Are you sure you want to delete this product?")) {
+    if (confirm("Are you sure you want to delete this product record?")) {
         axios.delete(`/api/product/${id}`)
             .then(() => {
-                alert("Product deleted successfully.");
+                showToast("Product record deleted successfully.", "success");
                 loadProducts();
             })
-            .catch(() => alert("Error deleting feedback."));
+            .catch(() => showToast("Error deleting product record.", "error"));
     }
 };
+
 
 function UpdateProduct(productId) {
     axios.get(`/api/product/${productId}`)
@@ -130,7 +130,7 @@ function UpdateProduct(productId) {
             const product = response.data.product;
 
             if (!product) {
-                alert("Product not found");
+                alert("Product record not found");
                 return;
             }
 
@@ -152,7 +152,7 @@ function UpdateProduct(productId) {
             updateModal.show();
         })
         .catch(error => {
-            console.error("Error fetching product:", error.response?.data || error.message);
+            console.error("Error fetching product record:", error.response?.data || error.message);
             alert("Failed to fetch product details.");
         });
 }

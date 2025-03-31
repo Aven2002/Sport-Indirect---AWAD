@@ -16,6 +16,7 @@ class User extends Model
         'username',
         'password',
         'dob',
+        'profileImg',
         'security_answers'
     ];
 }

@@ -3,6 +3,9 @@
 @section('title', 'Product Management - Sport Indirect')
 
 @section('content')
+
+@include('components.toast')
+
 <div class="container mt-2">
     <h1 class="text-center">Product Management</h1>
 <!-- Add Product Button -->
@@ -21,7 +24,6 @@
                 <th>Brand</th>
                 <th>Stock</th>
                 <th>Price</th>
-                <th>Created At</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -64,7 +66,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Update Product</h5>
+                <h5 class="modal-title">Update Product Record</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">

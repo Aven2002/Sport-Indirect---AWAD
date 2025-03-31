@@ -14,6 +14,7 @@ return new class extends Migration {
             $table->string('password');
             $table->date('dob'); 
             $table->json('security_answers'); 
+            $table->string('imgPath')->default('images/Profile_Img/Profile_Img_Default.png');
             $table->timestamps(); // Automatically adds created_at & updated_at
         });
     }
