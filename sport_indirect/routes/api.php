@@ -15,7 +15,7 @@ Route::get('/profile/{id}',[ProfileController::class,'getProfile']);
 Route::put('/profile/{id}',[ProfileController::class,'update']);
 
 //User
-Route::get('/user',[UserController::class,'index']);
+Route::get('/users',[UserController::class,'index']);
 Route::post('/user',[UserController::class,'store']);
 Route::delete('/user/{id}',[UserController::class,'destroy']);
 

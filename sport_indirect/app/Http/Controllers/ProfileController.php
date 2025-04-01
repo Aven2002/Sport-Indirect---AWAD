@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Requets;
+use Illuminate\Http\Request;
 use App\Models\User;
 
 class ProfileController extends Controller
@@ -52,10 +52,9 @@ class ProfileController extends Controller
 
             // Validate request data
             $validatedData = $request->validate([
-                'name' => 'nullable|string|max:50',
+                'username' => 'nullable|string|max:50',
                 'email' => 'nullable|email|unique:users,email,' . $id,
-                'phoneNo' => 'nullable|string|max:20',
-                'address' => 'nullable|string|max:255'
+                'dob' => 'nullable|string|max:20',
             ]);
 
             // Update only provided fields
