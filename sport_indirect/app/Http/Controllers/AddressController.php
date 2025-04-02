@@ -18,6 +18,33 @@ class AddressController extends Controller
     }
 
     /**
+     * Retrive specific address by id
+     */
+    public function getAddress($id)
+    {
+        try{
+            $address = Address::find($id);
+
+            if(!$address)
+            {
+                return response()->json([
+                    'message'=>'Address record not found'
+                ], 404);
+            }
+
+            return response()->json([
+                'message'=>'Address record retrieve successfully',
+                'address'=>$address
+            ], 200);
+        }catch(\Exception $e){
+            return response()->json([
+                'message'=>'Something went wrong',
+                'error'=>$e.getMessage()
+            ], 500);
+        }
+    }
+
+    /**
      * Retrieve the list of the address own by the user
      */
     public function getUserAddressBook($id)

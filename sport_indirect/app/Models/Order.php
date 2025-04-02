@@ -15,6 +15,13 @@ class Order extends Model
         'user_id',
         'address_id',
         'totalPrice',
-        'status'
+        'status',
+        'paymentMethod'
     ];
+
+    // Define the relationship
+    public function orderDetails()
+    {
+        return $this->hasMany(OrderDetail::class);
+    }
 }

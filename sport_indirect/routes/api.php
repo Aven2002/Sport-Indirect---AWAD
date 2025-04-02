@@ -42,14 +42,16 @@ Route::delete('/product/{id}',[ProductController::class,'destroy']);
 
 //Order
 Route::get('/order',[OrderController::class,'index']);
-Route::get('/order/{id}',[OrderController::class,'getUserOrders']);
+Route::get('/order/{id}',[OrderController::class,'getOrder']);
+Route::get('/userOrder/{id}',[OrderController::class,'getUserOrders']);
 Route::post('/order',[OrderController::class,'store']);
 Route::put('/order/{id}',[OrderController::class,'update']);
 Route::delete('/order/{id}',[OrderController::class,'destroy']);
 
 //Address
 Route::get('/address',[AddressController::class,'index']);
-Route::get('/address/{id}',[AddressController::class,'getUserAddressBook']);
+Route::get('/address/{id}',[AddressController::class, 'getAddress']);
+Route::get('/userAddress/{id}',[AddressController::class,'getUserAddressBook']);
 Route::post('/address',[AddressController::class,'store']);
 Route::put('/address/{id}',[AddressController::class,'update']);
 Route::delete('/address/{id}',[AddressController::class,'destroy']);

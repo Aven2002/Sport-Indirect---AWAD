@@ -16,7 +16,8 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained();
             $table->foreignId('address_id')->constrained();
             $table->decimal('totalPrice',10,2)->unsigned();
-            $table->string('status',50)->default('Pending');
+            $table->string('paymentMethod',50);
+            $table->string('status',50)->default('Processing');
             $table->timestamps();
         });
 

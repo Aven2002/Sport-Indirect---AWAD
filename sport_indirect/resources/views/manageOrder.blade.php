@@ -1,188 +1,117 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Order Management - Sport Indirect</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</head>
-
 @extends('layouts.admin')
 
 @section('title', 'Order Management - Sport Indirect')
 
 @section('content')
-@php
-    $dummyOrders = [
-        (object)[ 'id' => 1, 'order_id' => '#ORD1001', 'customer_name' => 'Alice Smith', 'status' => 'Pending', 'total' => 250.00, 'tracking_info' => '' ],
-        (object)[ 'id' => 2, 'order_id' => '#ORD1002', 'customer_name' => 'Bob Johnson', 'status' => 'To Ship', 'total' => 150.00, 'tracking_info' => '' ],
-        (object)[ 'id' => 3, 'order_id' => '#ORD1003', 'customer_name' => 'Charlie Brown', 'status' => 'Shipped', 'total' => 300.00, 'tracking_info' => 'Tracking #: TRK123456' ],
-        (object)[ 'id' => 4, 'order_id' => '#ORD1004', 'customer_name' => 'Dana White', 'status' => 'Return/Refund', 'total' => 120.00, 'tracking_info' => 'Item returned' ],
-        (object)[ 'id' => 5, 'order_id' => '#ORD1005', 'customer_name' => 'Eve Adams', 'status' => 'Cancelled', 'total' => 90.00, 'tracking_info' => 'Order cancelled' ],
-        (object)[ 'id' => 6, 'order_id' => '#ORD1006', 'customer_name' => 'Frank Miller', 'status' => 'Delivered', 'total' => 180.00, 'tracking_info' => 'Delivered on 2023-10-10' ]
-    ];
-@endphp
 
-<div class="container my-5">
-    <h1 class="text-center mb-4">Order Management</h1>
-    
-    <!-- Top Buttons -->
-    <div class="text-center mb-4">
-        <button class="btn btn-primary me-2" onclick="toggleCreateOrderForm()">Create New Order</button>
-        <button class="btn btn-dark" onclick="toggleSearchOrder()">Search Order</button>
-        <select id="orderFilter" class="btn btn-secondary me-2" onchange="filterOrders()">
-            <option value="All">All Orders</option>
-            <option value="Pending">Pending</option>
-            <option value="To Ship">To Ship</option>
-            <option value="Shipped">Shipped</option>
-            <option value="Delivered">Delivered</option>
-            <option value="Return/Refund">Return/Refund</option>
-            <option value="Cancelled">Cancelled</option>
-        </select>
-    </div>
+@include('components.toast')
 
-    <!-- Search Order Form -->
-    <div id="searchOrderForm" class="border p-3 mb-3 text-center" style="display: none;">
-        <label for="searchOrderId" class="form-label">Enter Order ID:</label>
-        <input type="text" id="searchOrderId" class="form-control d-inline-block w-25 me-2">
-        <button class="btn btn-info" onclick="searchOrder()">Search</button>
-        <button class="btn btn-danger" onclick="clearSearch()">Clear</button>
-    </div>
-
-    <!-- Create Order Form -->
-    <div id="createOrderForm" class="border p-3 mb-3" style="display: none;">
-        <h2>Create New Order</h2>
-        <form id="orderForm">
-            <div class="mb-3">
-                <label for="orderId" class="form-label">Order ID</label>
-                <input type="text" name="order_id" id="orderId" class="form-control" required>
-            </div>
-            <div class="mb-3">
-                <label for="customerName" class="form-label">Customer Name</label>
-                <input type="text" name="customer_name" id="customerName" class="form-control" required>
-            </div>
-            <div class="mb-3">
-                <label for="orderStatus" class="form-label">Status</label>
-                <select name="status" id="orderStatus" class="form-select" required>
-                    <option value="Pending">Pending</option>
-                    <option value="To Ship">To Ship</option>
-                    <option value="Shipped">Shipped</option>
-                    <option value="Delivered">Delivered</option>
-                    <option value="Return/Refund">Return/Refund</option>
-                    <option value="Cancelled">Cancelled</option>
-                </select>
-            </div>
-            <div class="mb-3">
-                <label for="orderTotal" class="form-label">Total (RM)</label>
-                <input type="number" step="0.01" name="total" id="orderTotal" class="form-control" required>
-            </div>
-            <button type="submit" class="btn btn-success">Create Order</button>
-            <button type="button" class="btn btn-danger" onclick="toggleCreateOrderForm()">Cancel</button>
-        </form>
-    </div>
+<div class="container mt-2">
+    <h1 class="text-center">Order Management</h1>
 
     <!-- Order List Table -->
-    <table class="table table-striped table-hover">
-        <thead class="table-dark">
+    <table class="table table-bordered mt-4">
+        <thead class="table-dark text-center">
             <tr>
-                <th>Order ID</th>
-                <th>Customer Name</th>
+                <th>ID</th>
+                <th>User ID</th>
+                <th>Address ID</th>
+                <th>T.Amount</th>
+                <th>P.Method</th>
                 <th>Status</th>
-                <th>Total (RM)</th>
-                <th>Tracking Info</th>
+                <th>Created At</th>
+                <th>Updated At</th>
                 <th>Actions</th>
             </tr>
         </thead>
-        <tbody id="orderTable">
-            @foreach ($dummyOrders as $order)
-            <tr class="order-row" data-status="{{ $order->status }}" data-order-id="{{ $order->order_id }}">
-                <td>{{ $order->order_id }}</td>
-                <td>{{ $order->customer_name }}</td>
-                <td>{{ $order->status }}</td>
-                <td>{{ number_format($order->total, 2) }}</td>
-                <td>{{ $order->tracking_info }}</td>
-                <td>
-                    @if($order->status != 'Cancelled')
-                        @if($order->status == 'To Ship')
-                            <button class="btn btn-success btn-sm">Ship</button>
-                        @endif
-                        @if($order->status == 'Shipped')
-                            <button class="btn btn-info btn-sm">Track</button>
-                        @endif
-                        @if($order->status == 'Return/Refund')
-                            <button class="btn btn-warning btn-sm">Refund</button>
-                        @endif
-                        <button class="btn btn-danger btn-sm" onclick="cancelOrder({{ $order->id }})">Cancel</button>
-                    @endif
-                </td>
-            </tr>
-            @endforeach
+        <tbody id="orderTableBody">
+            <!-- Order data will be inserted here -->
         </tbody>
     </table>
+
+    <!-- Bootstrap Pagination -->
+    <nav>
+        <ul class="pagination justify-content-center" id="pagination">
+            <!-- Pagination buttons will be generated dynamically -->
+        </ul>
+    </nav>
+
 </div>
 
-<!-- JavaScript Functions -->
-<script>
-    function toggleCreateOrderForm() {
-        var createForm = document.getElementById('createOrderForm');
-        var searchForm = document.getElementById('searchOrderForm');
+<!-- Order Details  Modal -->
+<div class="modal fade" id="receiptModal" tabindex="-1" aria-labelledby="receiptModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="receiptModalLabel">Order Receipt</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      <h5 class="mb-4">Order ID: <span id="orderId"></span></h5>
+        <div class="row mb-3">
+            <div class="col-6">
+            <strong>Recipient Name:</strong> <span id="recipientName"></span>
+            </div>
+            <div class="col-6">
+            <strong>Contact Number:</strong> <span id="contactNumber"></span>
+            </div>
+        </div>
 
-        // Close the search form when opening the create form
-        searchForm.style.display = 'none';
+        <!-- Shipping Address -->
+        <div class="col-6 mb-5">
+            <strong>Shipping Address:</strong> <span id="address"></span>
+        </div>
 
-        // Toggle create order form
-        createForm.style.display = (createForm.style.display === 'block') ? 'none' : 'block';
-    }
+        <h6>Products:</h6>
+        <ul id="productList" class="list-group">
+          <!-- Product list will be populated here -->
+        </ul>
 
-    function toggleSearchOrder() {
-        var createForm = document.getElementById('createOrderForm');
-        var searchForm = document.getElementById('searchOrderForm');
+        <h5 class="mt-3">Total Price: $<span id="totalPrice"></span></h5>
+      </div>
+    </div>
+  </div>
+</div>
 
-        // Close the create form when opening the search form
-        createForm.style.display = 'none';
 
-        // Toggle search order form
-        searchForm.style.display = (searchForm.style.display === 'block') ? 'none' : 'block';
-    }
+<!-- Update Order Modal -->
+<div class="modal fade" id="updateOrderModal" tabindex="-1" aria-labelledby="updateOrderLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Update Order Status</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="updateOrderForm">
+                    <input type="hidden" id="updateOrderId">
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Order Status</label>
+                        <select id="updateOrderStatus" class="form-select" required>
+                            <option value="Processing">Processing</option>
+                            <option value="Shipped">Shipped</option>
+                            <option value="Delivered">Delivered</option>
+                            <option value="Cancelled">Cancelled</option>
+                            <option value="Refund">Refund</option>
+                            <option value="Return & Refund">Return & Refund</option>
+                        </select>
+                    </div>
 
-    function searchOrder() {
-        var searchId = document.getElementById("searchOrderId").value.trim().toUpperCase();
-        var rows = document.querySelectorAll(".order-row");
+                    <div class="d-flex justify-content-between">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Save Changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
-        rows.forEach(row => {
-            var orderId = row.getAttribute("data-order-id").toUpperCase();
-            row.style.display = (orderId === searchId || searchId === '') ? '' : 'none';
-        });
-    }
 
-    function clearSearch() {
-        document.getElementById("searchOrderId").value = "";
-        searchOrder();
-    }
-
-    function cancelOrder(orderId) {
-        alert("Order " + orderId + " has been cancelled.");
-    }
-
-    function filterOrders() {
-        var selectedStatus = document.getElementById("orderFilter").value;
-        var rows = document.querySelectorAll(".order-row");
-
-        rows.forEach(row => {
-            var orderStatus = row.getAttribute("data-status");
-            if (selectedStatus === "All" || orderStatus === selectedStatus) {
-                row.style.display = "";
-            } else {
-                row.style.display = "none";
-            }
-        });
-    }
-
-    document.getElementById("orderForm").addEventListener("submit", function(event) {
-        event.preventDefault();
-        alert("Order Created Successfully!");
-        toggleCreateOrderForm();
-    });
-</script>
+<!-- Bootstrap & Axios -->
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="{{ asset('js/orderManagement.js') }}"></script>
 @endsection
+
+
